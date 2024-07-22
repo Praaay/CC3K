@@ -1,17 +1,18 @@
-#ifndef Floor
-#define Floor
+#ifndef FLOOR_H
+#define FLOOR_H
 #include <iostream>
 #include <fstream>
 #include <string>
-#include<vector>
+#include <vector>
 
 
-class floor{
+class Floor{
 
     std::vector<std::vector<char> > floormap;
 
-    void generatefloor();
-    void printfloor();
+  public:
+    void generateFloor();
+    void printFloor();
 
 };
 

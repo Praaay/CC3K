@@ -4,8 +4,9 @@
 #include <string>
 #include <vector>
 
+using namespace std;
 
-void floor::generatefloor(){
+void Floor::generateFloor(){
 
     std::string line;
     std::ifstream inp("blankmap.txt");
@@ -19,12 +20,13 @@ void floor::generatefloor(){
     }
 }
 
-void floor::printfloor(){
+void Floor::printFloor(){
 
     for(int i = 0; i < floormap.size(); i++){
         for(int j = 0; j < floormap[0].size(); j++){
             std::cout << floormap[i][j];
         }
+        std::cout << endl;
     }
 
 }

@@ -1,13 +1,13 @@
-#ifndef DWARF_H
-#define DWARF_H
+#ifndef HALFING_H
+#define HALFING_H
 #include "enemies.h"
 
-class Dwarf : public Enemies {
+class Halfing : public Enemies {
     public:
      void attack(Player *) override;
      void attackedBy(Player * ) override;
      void dropGold() override;
-     ~Dwarf();
+     ~Halfing();
 };
 
 #endif

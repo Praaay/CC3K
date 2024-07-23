@@ -4,6 +4,7 @@
 
 class Dragon : public Enemies {
     public:
+     Dragon(int x , int y);
      void attack(Player *) override;
      void attackedBy(Player * ) override;
      void dropGold() override;

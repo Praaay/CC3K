@@ -4,9 +4,9 @@
 // Game::Game(Floor &floor) : floor{floor} {}
 
 void Game::newGame() {
-    floor->generateFloor();
+    floor.generateFloor();
 }
 
 void Game::render() {
-    floor->printFloor();
+    floor.printFloor();
 }

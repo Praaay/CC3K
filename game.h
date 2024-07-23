@@ -23,8 +23,11 @@ class Game {
     // unique_ptr<Potions*> potions;
     protected:
     Player * player;
-    Floor * floor;
-    // Game(Floor &floor);
+    Floor floor;
+
+    public:
+  //  Game(Floor &floor);
+    void getFloor();
     void render();
     void getTick();
     void getCol();

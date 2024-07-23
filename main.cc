@@ -33,11 +33,12 @@ bool determineDirection(string &dir, string &cmd) { //  return true if the comma
 
 int main(int argc, char const *argv[]) {
 
-    Game object;
-    // Floor floor;
 
+    Game object;
     string command;
     string direction;
+
+    object.newGame();
 
     cout << "Please select a race for your player" << endl;
     cout << "Drow : 'd'" << endl;
@@ -59,7 +60,7 @@ int main(int argc, char const *argv[]) {
 
     }
 
-
+    object.render();
 
     while(cin >> command) {
 

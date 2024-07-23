@@ -4,6 +4,7 @@
 
 class Drow : public Player {
     public:
+    Drow(int x , int y);
     void attack(std::string direction) override;
     void attackedBy(Enemies * enemy ) override;
      ~Drow();

@@ -10,6 +10,7 @@ class Player : public Character {
     int goldCount; 
 
     public:
+    Player(int x , int y);
     virtual void attack(std::string direction) = 0;
     virtual void attackedBy(Enemies * enemy ) = 0;
     void move(std::string direction) override;

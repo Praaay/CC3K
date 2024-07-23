@@ -5,6 +5,7 @@
 
 class Shade : public Player {
     public:
+    Shade(int x , int y);
     void attack(std::string direction) override;
     void attackedBy(Enemies * enemy ) override;
      ~Shade();

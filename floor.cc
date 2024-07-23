@@ -29,5 +29,4 @@ void Floor::printFloor(){
         }
         std::cout << endl;
     }
-
 }

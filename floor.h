@@ -9,7 +9,7 @@
 
 class Floor{
 
-    std::vector<std::vector<char> > floormap;
+  std::vector<std::vector<char> > floormap;
 
   public:
     void generateFloor();

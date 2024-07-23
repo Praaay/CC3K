@@ -34,6 +34,7 @@ bool determineDirection(string &dir, string &cmd) { //  return true if the comma
 int main(int argc, char const *argv[]) {
 
     Game object;
+    // Floor floor;
 
     string command;
     string direction;
@@ -58,6 +59,10 @@ int main(int argc, char const *argv[]) {
 
     }
 
+    object.generateFloor();
+    object.printFloor();
+
+
 
     while(cin >> command) {
 
@@ -72,10 +77,6 @@ int main(int argc, char const *argv[]) {
         }
 
     }
-
-
-
-
 }
 
 

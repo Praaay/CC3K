@@ -2,11 +2,12 @@
 #define VAMPIRE_H
 #include "player.h"
 
-class Vapmire : public Player {
+class Vampire : public Player {
     public:
+    Vampire(int x , int y);
     void attack(std::string direction) override;
     void attackedBy(Enemies * enemy ) override;
-     ~Vapmire();
+     ~Vampire();
 };
 
 #endif

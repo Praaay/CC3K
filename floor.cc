@@ -30,3 +30,13 @@ void Floor::printFloor(){
         std::cout << endl;
     }
 }
+
+char Floor::charAt(int x , int y) {
+    return floormap[x][y];
+}
+
+void Floor::setChar(int x , int y ,char tmp) {
+   // prev = charAt(x,y);
+    // cout<<"The prev char from floor is"<<prev;<<" "
+    floormap[x][y] = tmp;
+}

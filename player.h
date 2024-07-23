@@ -11,9 +11,9 @@ class Player : public Character {
 
     public:
     Player(int x , int y);
-    virtual void attack(std::string direction) = 0;
-    virtual void attackedBy(Enemies * enemy ) = 0;
-    void move(std::string direction) override;
+    virtual void attack(std::string direction);
+    virtual void attackedBy(Enemies * enemy );
+   // void move(Floor floor, std::string direction) override;
     void gg() override; 
     virtual ~Player();  
 };

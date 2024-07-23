@@ -10,10 +10,13 @@
 class Floor{
 
   std::vector<std::vector<char> > floormap;
+  //char prev;
 
   public:
     void generateFloor();
     void printFloor();
+    char charAt(int x , int y);
+    void setChar(int x , int y, char tmp);
 
 };
 

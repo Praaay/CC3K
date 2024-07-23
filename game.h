@@ -22,12 +22,15 @@ class Game {
     // unique_ptr<Enemies*> enemies;
     // unique_ptr<Potions*> potions;
     protected:
-    Player * player;
+    unique_ptr<Player> player;
     Floor floor;
 
     public:
   //  Game(Floor &floor);
-    void getFloor();
+    Game();
+    Floor getFloor();
+
+    void moveplayer(std::string direction);
     void render();
     void getTick();
     void getCol();

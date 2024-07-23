@@ -40,6 +40,8 @@ int main(int argc, char const *argv[]) {
 
     object.newGame();
 
+    // Floor newfloor = object.getFloor();
+
     cout << "Please select a race for your player" << endl;
     cout << "Drow : 'd'" << endl;
     cout << "Goblins : 'g'" << endl;
@@ -61,11 +63,14 @@ int main(int argc, char const *argv[]) {
     }
 
     object.render();
+//    cout<<newfloor.charAt(3,5);
 
     while(cin >> command) {
 
         if (determineDirection(direction, command)) {  //  return true if the command is a direction
-            
+            cout<<direction;
+            object.moveplayer(direction);
+            object.render();
         } else if (command == "u") {
 
         } else if (command == "a") {

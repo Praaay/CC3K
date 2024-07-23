@@ -10,7 +10,7 @@
 using namespace sstd;
 
 class Stairs{
-
+    int row, col;
 
 }
 

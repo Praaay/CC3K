@@ -3,7 +3,7 @@
 #include "treasure.h"
 
 class Small : public Treasure{
-    int nahan;
+
 };
 
 #endif

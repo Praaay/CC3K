@@ -7,6 +7,7 @@
 #include <memory>
 
 #include <character.h>
+
 #include <stairs.h> 
 #include <level.h>
 #include <potion.h>

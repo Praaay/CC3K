@@ -59,9 +59,6 @@ int main(int argc, char const *argv[]) {
 
     }
 
-    object.generateFloor();
-    object.printFloor();
-
 
 
     while(cin >> command) {

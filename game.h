@@ -17,10 +17,11 @@
 
 using namespace std;
 
-class Game : public Floor , public Treasure {
+class Game {
 
     // unique_ptr<Enemies*> enemies;
     // unique_ptr<Potions*> potions;
+    protected:
     Player * player;
     Floor * floor;
     // Game(Floor &floor);

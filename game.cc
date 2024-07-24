@@ -20,3 +20,8 @@ void Game::moveplayer(std::string direction) {
 
     player->move(floor,direction);
 }
+
+void Game::nextFloor() {
+    ++currLevel;
+    floor.generateFloor();
+}

@@ -23,9 +23,11 @@ class Character {
     int getAtk();
     int getDef();
     int getHp();
+
     void setAtk(int atk);
     void setDef(int def);
     void setHp(int hp);
+    
     void setPosition(int row, int col);
     virtual void gg() = 0;
     virtual ~Character();

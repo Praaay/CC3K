@@ -24,6 +24,7 @@ class Game {
     protected:
     unique_ptr<Player> player;
     Floor floor;
+    int currLevel = 1;
     public:
   //  Game(Floor &floor);
     Game();
@@ -32,7 +33,7 @@ class Game {
     void moveplayer(std::string direction);
     void render();
     void getTick();
-    void getCol();
+
     void newGame();
     void nextFloor();
     void printMessage();

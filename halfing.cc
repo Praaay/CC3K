@@ -6,7 +6,7 @@ Halfing::Halfing(int x , int y) : Enemies{x,y} {
     def = 20;
 }
 
-void Halfing::attack(Player *) {}
+// void Halfing::attack(Player *) {}
 void Halfing::attackedBy(Player *) {}
 void Halfing::dropGold() {}
 Halfing::~Halfing() {}

@@ -6,7 +6,6 @@ class Elf : public Enemies {
     public:
      Elf(int x , int y);
      void attack(Player *) override;
-     void attackedBy(Player * ) override;
      void dropGold() override;
      ~Elf();
 };

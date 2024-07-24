@@ -38,7 +38,7 @@ int main(int argc, char const *argv[]) {
     string command;
     string direction;
 
-    object.newGame();
+
 
     // Floor newfloor = object.getFloor();
 
@@ -61,6 +61,8 @@ int main(int argc, char const *argv[]) {
     } else  if (command == "v") {
 
     }
+    
+    object.newGame();
     std::cout << "\x1B[2J\x1B[H";
     object.render();
 

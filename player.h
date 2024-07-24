@@ -13,7 +13,7 @@ class Player : public Character {
     Player(int x , int y);
     virtual void attack(std::string direction);
     virtual void attackedBy(Enemies * enemy );
-   // void move(Floor floor, std::string direction) override;
+    //void move(Floor floor, std::string direction) override;
     void gg() override; 
     virtual ~Player();  
 };

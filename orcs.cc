@@ -7,6 +7,6 @@ Orcs::Orcs(int x , int y) : Enemies{x,y} {
 }
 
 void Orcs::attack(Player *) {}
-void Orcs::attackedBy(Player *) {}
+// void Orcs::attackedBy(Player *) {}
 void Orcs::dropGold() {}
 Orcs::~Orcs() {}

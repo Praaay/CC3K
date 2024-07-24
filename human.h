@@ -5,8 +5,8 @@
 class Human : public Enemies {
     public:
      Human(int x , int y);
-     void attack(Player *) override;
-     void attackedBy(Player * ) override;
+    //  void attack(Player *) override;
+    //  void attackedBy(Player * ) override;
      void dropGold() override;
      ~Human();
 };

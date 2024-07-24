@@ -10,14 +10,14 @@
 class Floor{
 
   std::vector<std::vector<char> > floormap;
-  //char prev;
-
+  std::vector<std::vector<char> > reference;
   public:
     void generateFloor();
     void printFloor();
     char charAt(int x , int y);
+    char referenceCharAt(int x , int y);
     void setChar(int x , int y, char tmp);
-
+ //   void clearPlayer(int x , int y,char prev);
 };
 
 

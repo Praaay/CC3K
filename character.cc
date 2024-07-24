@@ -41,7 +41,7 @@ void Character::setPosition(int row, int col) {
 
 
 void Character::move(Floor &floor, std::string direction) {
-    std::cout<<"hello";
+  //  std::cout<<"hello";
 
     int newRow = 0;
     int newCol = 0;
@@ -75,15 +75,16 @@ void Character::move(Floor &floor, std::string direction) {
         newRow = row + 1;
         newCol = col - 1;
     }
-
     // std::cout<<"the col from the character class is "<<newCol;
     // std::cout<<"the row from the character class is "<<newRow;
-
    // std::cout<<"The prev char is "<<prev;
 
-    floor.setChar(row,col,'.');
+   if (floor.charAt(newRow,newCol) == '.' || floor.charAt(newRow,newCol) == '#'  || floor.charAt(newRow,newCol) == '\\' || floor.charAt(newRow,newCol) == '+' ) {
+    char reference = floor.referenceCharAt(row,col);
+    floor.setChar(row,col,reference);
     setPosition(newRow,newCol);
     floor.setChar(newRow,newCol,'@');
+   }
 }
 
 Character::~Character() {}

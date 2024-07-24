@@ -24,7 +24,6 @@ class Game {
     protected:
     unique_ptr<Player> player;
     Floor floor;
-
     public:
   //  Game(Floor &floor);
     Game();

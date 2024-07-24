@@ -18,7 +18,11 @@ void Floor::generateFloor(){
             eachline.push_back(line[i]);
         }
         floormap.push_back(eachline);
+        reference.push_back(eachline);
     }
+  //  prev = charAt(3,5);
+  
+    setChar(3,5,'@');
 }
 
 void Floor::printFloor(){
@@ -31,6 +35,10 @@ void Floor::printFloor(){
     }
 }
 
+char Floor::referenceCharAt(int x , int y) {
+    return reference[x][y];
+}
+
 char Floor::charAt(int x , int y) {
     return floormap[x][y];
 }
@@ -40,3 +48,7 @@ void Floor::setChar(int x , int y ,char tmp) {
     // cout<<"The prev char from floor is"<<prev;<<" "
     floormap[x][y] = tmp;
 }
+
+// void Floor::clearPlayer(int x , int y,char prev) {
+//     floormap[x][y] = prev;
+// }

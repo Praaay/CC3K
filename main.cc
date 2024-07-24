@@ -61,8 +61,9 @@ int main(int argc, char const *argv[]) {
     } else  if (command == "v") {
 
     }
-
+    std::cout << "\x1B[2J\x1B[H";
     object.render();
+
 //    cout<<newfloor.charAt(3,5);
 
     while(cin >> command) {
@@ -70,6 +71,7 @@ int main(int argc, char const *argv[]) {
         if (determineDirection(direction, command)) {  //  return true if the command is a direction
             cout<<direction;
             object.moveplayer(direction);
+            std::cout << "\x1B[2J\x1B[H";
             object.render();
         } else if (command == "u") {
 

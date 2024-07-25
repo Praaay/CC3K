@@ -11,6 +11,8 @@ Game::Game(std::string tmp_race)  {
     } else if (tmp_race == "Vampire") {
         player = make_unique<Vampire>(3,5);
         setPlayerRace("Vampire");
+
+        potions.emplace_back(make_unique<Potion>(3, 7, 5, "WD"));
     } else if (tmp_race == "Goblin") {
         player = make_unique<Goblin>(3,5);
         setPlayerRace("Goblin");

@@ -110,18 +110,21 @@ int main(int argc, char const *argv[]) {
             cin >> secondCommand;
             if (determineDirection(direction, secondCommand)) {
                 int newRow = object.newRowWrtPlayer(direction);
-                int newCol = object.newRowWrtPlayer(direction);
+                int newCol = object.newColWrtPlayer(direction);
                 
                 if (object.getFloor().charAt(newRow, newCol) == 'P') {
                     object.usePotion(newRow, newCol);
                     object.resetChar(newRow, newCol);
+
+                    cout << "Used a potion" << endl;
                 } else {
                     cout << "no potion there, dumbass" << endl;
                 }
             } else {
                 cout << "wrong input, dumbass" << endl;
             }
-            
+
+            object.render();
         } else if (command == "a") {
 
         } else {

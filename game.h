@@ -32,7 +32,7 @@ class Game {
     // unique_ptr<Potions*> potions;
     protected:
     unique_ptr<Player> player;
-    unique_ptr<Treasure> treasure;
+    std::vector<unique_ptr<Treasure>> treasure;
     
 
 

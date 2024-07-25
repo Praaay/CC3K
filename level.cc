@@ -8,25 +8,28 @@ void Level::generatePotion() {}
 void Level::generatetairs() {}
 
 void Level::generateTreasure() {
-    // PRNG prng1;
-    // uint32_t seed = getpid();
-    // prng1.seed(seed);
+    PRNG prng1;
+    uint32_t seed = getpid();
+    prng1.seed(seed);
 
-    // for (int i = 0; i < 10; i++) {
-    // int value = prng1(1,8);
+    for (int i = 0; i < 10; i++) {
 
-    // if (1 <= value && value <= 5) {
+    int value = prng1(1,8);
+    unique_ptr<Treasure> tmp;
 
-    // } else if (5 < value)
-
-    // }
-    
-
-    //treasure = make_unique<Normal>(3,7);
+    if (1 <= value && value <= 5) {
+        tmp = make_unique<Normal>(3, 10 - i);
+    } else if (5 < value && value <= 6) {
+        tmp = make_unique<DragonHoard>(3, 10 - i);
+    } else if (6 < value && value <= 8) {
+        tmp = make_unique<Small>(3,10 - i);
+    }
+    treasure.push_back(tmp); 
+    }
 }
 
-unique_ptr<Treasure> Level::getTreasure() {
-  //  return std::move(treasure);
+std::vector<unique_ptr<Treasure>> Level::getTreasure() {
+    return (std::move(treasure));
 }
 
 

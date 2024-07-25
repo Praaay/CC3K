@@ -21,6 +21,8 @@ Game::Game(std::string tmp_race)  {
         player = make_unique<Troll>(3,5);
         setPlayerRace("Troll");
     }
+
+
 }
 
 Floor Game::getFloor() {
@@ -28,6 +30,16 @@ Floor Game::getFloor() {
 }
 void Game::newGame() {
     floor.generateFloor();
+    level.generateTreasure();
+
+    treasure = level.getTreasure();
+
+   
+    floor.setChar(3,7,'G');
+
+    // treasure = make_unique<Normal>(3,7);
+    // floor.setChar(3,7,'G');
+    
 }
 
 void Game::render() {
@@ -50,9 +62,48 @@ void Game::printMessage() {
 }
 
 void Game::moveplayer(std::string direction) {
-    player->move(floor,direction);
+
+    int newRow = player->getRow();
+    int newCol = player->getCol();
+
+    if (direction == "no") {
+        newRow--;
+    } else if (direction == "so") {
+        newRow++;
+    } else if (direction == "ea") {
+        newCol++;
+    } else if (direction == "we") {
+        newCol--;
+    } else if (direction == "ne") {
+        newRow--;
+        newCol;
+    } else if (direction == "nw") {
+        newRow--;
+        newCol--;
+    } else if (direction == "se") {
+        newRow++;
+        newCol++;
+    } else if (direction == "sw") {
+        newRow++;
+        newCol--;
+    }
+
+    if (floor.charAt(newRow,newCol) == 'G') {
+        pickupPlayerGold();
+    }    
+     
+    player->move(floor,direction);    
 }
 
+void Game::pickupPlayerGold(){
+
+    int treasureRow = treasure->getRow();
+    int treasureCol = treasure->getCol();
+
+    player->pickupGold(std::move(treasure));   
+    char floorChar = floor.referenceCharAt(treasureRow,treasureCol);
+    floor.setChar(treasureRow,treasureCol,floorChar);
+}
 
 void Game::setPlayerRace(std::string race) {
     player->setRace(race);

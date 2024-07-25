@@ -1,5 +1,5 @@
 #include "level.h"
-#include "PRNG.h"
+
 #include <unistd.h>
 
 Level::Level() {}
@@ -18,13 +18,13 @@ void Level::generateTreasure() {
     unique_ptr<Treasure> tmp;
 
     if (1 <= value && value <= 5) {
-        tmp = make_unique<Normal>(3, 10 - i);
+        tmp = make_unique<Normal>(3, 15 - i);
     } else if (5 < value && value <= 6) {
-        tmp = make_unique<DragonHoard>(3, 10 - i);
+        tmp = make_unique<DragonHoard>(3, 15 - i);
     } else if (6 < value && value <= 8) {
-        tmp = make_unique<Small>(3,10 - i);
+        tmp = make_unique<Small>(3,15 - i);
     }
-    treasure.push_back(tmp); 
+    treasure.push_back(std::move(tmp)); 
     }
 }
 

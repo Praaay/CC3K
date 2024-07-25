@@ -1,6 +1,7 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 #include "abstractlevel.h"
+#include "PRNG.h"
 
 class Level : public Abstractlevel {
     

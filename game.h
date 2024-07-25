@@ -28,7 +28,7 @@ class Game {
     // unique_ptr<Enemies*> enemies;
     // unique_ptr<Potions*> potions;
     protected:
-    unique_ptr<Player> player;
+    unique_ptr<Player> player{};
     Floor floor;
     public:
   //  Game(Floor &floor);

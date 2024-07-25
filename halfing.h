@@ -4,9 +4,7 @@
 
 class Halfing : public Enemies {
     public:
-     Halfing(int x , int y);
-     void attack(Player *) override;
-     void attackedBy(Player * ) override;
+     Halfing(int row, int col);
      void dropGold() override;
      ~Halfing();
 };

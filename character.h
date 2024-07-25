@@ -11,11 +11,12 @@ class Character {
     int row;
     int col;
     char symbol;
+    std::string race;
 
     public: 
-    Character(char display, int x , int y);
+    Character(char display, int row , int col, int atk, int def, int hp, std::string race);
 
-    void move(Floor &floor, std::string direction);
+    virtual void move(Floor &floor, std::string direction, char symbol);
 
     int getRow();
     int getCol();

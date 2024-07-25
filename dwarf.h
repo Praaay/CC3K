@@ -4,8 +4,7 @@
 
 class Dwarf : public Enemies {
     public:
-     void attack(Player *) override;
-     void attackedBy(Player * ) override;
+     Dwarf(int row, int col);
      void dropGold() override;
      ~Dwarf();
 };

@@ -1,17 +1,10 @@
 #include "troll.h"
 
-Troll::Troll(int x , int y) : Player{x,y} {
-    hp = 120;
-    atk = 25;
-    def = 15;
-}
+Troll::Troll(int row, int col) : Player{row, col, 25, 15, 120, "Troll"} {}
 
 void Troll::attack(std::string direction) {
 
 }
 
-void Troll::attackedBy(Enemies * enemy) {
-    
-}
 
 Troll::~Troll() {}

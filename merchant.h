@@ -4,9 +4,7 @@
 
 class Merchant : public Enemies {
     public:
-    Merchant(int x , int y);
-     void attack(Player *) override;
-     void attackedBy(Player * ) override;
+    Merchant(int row, int col);
      void dropGold() override;
      ~Merchant();
 };

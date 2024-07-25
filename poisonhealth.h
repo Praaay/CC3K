@@ -1,7 +1,7 @@
 #ifndef POISONHEALTH_H
 #define POISONHEALTH_H
 
-#include "potion.h"
+#include <potion.h>
 #include <string>
 using namespace std;
 

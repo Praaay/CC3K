@@ -7,7 +7,6 @@ class Goblin : public Player {
     public:
     Goblin(int x , int y);
     void attack(std::string direction) override;
-    void attackedBy(Enemies * enemy ) override;
      ~Goblin();
 };
 

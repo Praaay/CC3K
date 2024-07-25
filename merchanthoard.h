@@ -3,8 +3,13 @@
 #include "treasure.h"
 
 class MerchantHoard : public Treasure{
-    public:
-    MerchantHoard(int row, int col);
+
+
+
+
+
+
+
 };
 
 

@@ -1,17 +1,8 @@
 #include "shade.h"
 
-Shade::Shade(int x , int y) : Player(x,y) {
-    hp = 125;
-    atk = 25;
-    def = 25;
-}
+Shade::Shade(int row, int col) : Player(row, col, 25, 25, 125, "Shade") {}
 
 void Shade::attack(std::string direction) {
 
 }
-
-void Shade::attackedBy(Enemies * enemy) {
-    
-}
-
 Shade::~Shade() {}

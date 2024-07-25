@@ -1,7 +1,7 @@
 #include "character.h"
-#include <string.h>
+#include <string>
 
-Character::Character(char display, int x , int y) : symbol{display} , row{x}, col{y} {}
+Character::Character(char display, int row , int col, int hp, int atk, int def, std::string race) : symbol{display}, row{row}, col{col}, atk{atk}, def{def}, hp{hp}, race{race} {}
 
 int Character::getAtk() {
     return atk;
@@ -40,11 +40,11 @@ void Character::setPosition(int row, int col) {
 }
 
 
-void Character::move(Floor &floor, std::string direction) {
+void Character::move(Floor &floor, std::string direction, char symbol) {
   //  std::cout<<"hello";
 
-    int newRow = 0;
-    int newCol = 0;
+    int newRow;
+    int newCol;
    // char prev = floor.charAt(row,col);
 
     if (direction == "no") {
@@ -81,9 +81,10 @@ void Character::move(Floor &floor, std::string direction) {
 
    if (floor.charAt(newRow,newCol) == '.' || floor.charAt(newRow,newCol) == '#'  || floor.charAt(newRow,newCol) == '\\' || floor.charAt(newRow,newCol) == '+' ) {
     char reference = floor.referenceCharAt(row,col);
+    std::cout << row << " " << col << std::endl;
     floor.setChar(row,col,reference);
     setPosition(newRow,newCol);
-    floor.setChar(newRow,newCol,'@');
+    floor.setChar(newRow,newCol, symbol);
    }
 }
 

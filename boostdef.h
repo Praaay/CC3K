@@ -1,7 +1,7 @@
 #ifndef BOOSTDEF_H
 #define BOOSTDEF_H
 
-#include "potion.h"
+#include <potion.h>
 #include <string>
 using namespace std;
 

@@ -33,10 +33,6 @@ void Game::newGame() {
     level.generateTreasure();
 
     treasure = level.getTreasure();
-
-   
-    floor.setChar(3,7,'G');
-
     // treasure = make_unique<Normal>(3,7);
     // floor.setChar(3,7,'G');
     
@@ -97,12 +93,12 @@ void Game::moveplayer(std::string direction) {
 
 void Game::pickupPlayerGold(){
 
-    int treasureRow = treasure->getRow();
-    int treasureCol = treasure->getCol();
+    // int treasureRow = treasure->getRow();
+    // int treasureCol = treasure->getCol();
 
-    player->pickupGold(std::move(treasure));   
-    char floorChar = floor.referenceCharAt(treasureRow,treasureCol);
-    floor.setChar(treasureRow,treasureCol,floorChar);
+    // player->pickupGold(std::move(treasure));   
+    // char floorChar = floor.referenceCharAt(treasureRow,treasureCol);
+    // floor.setChar(treasureRow,treasureCol,floorChar);
 }
 
 void Game::setPlayerRace(std::string race) {

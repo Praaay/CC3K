@@ -34,8 +34,9 @@ bool determineDirection(string &dir, string &cmd) { //  return true if the comma
 int main(int argc, char const *argv[]) {
 
 
-  //  Game object;
+    //  Game object;
     string command;
+    string secondCommand;
     string direction;
     string race;
 
@@ -73,14 +74,17 @@ int main(int argc, char const *argv[]) {
 
 //    cout<<newfloor.charAt(3,5);
 
+
+
+
     while(cin >> command) {
 
         if (determineDirection(direction, command)) {  //  return true if the command is a direction
-            cout<<direction;
+            //cout<<direction;
 
-            std::string tmp_dir;
+            string tmp_dir;
             object.moveplayer(direction);
-            std::cout << "\x1B[2J\x1B[H";
+            cout << "\x1B[2J\x1B[H";
             object.render();
 
             if (direction == "no") {
@@ -101,9 +105,23 @@ int main(int argc, char const *argv[]) {
                 tmp_dir = "SouthWest";
             }
 
-            cout<<"Action: Player moves "<<tmp_dir<<endl;
+            cout << "Action: Player moves " << tmp_dir << endl;
         } else if (command == "u") {
-
+            cin >> secondCommand;
+            if (determineDirection(direction, secondCommand)) {
+                int newRow = object.newRowWrtPlayer(direction);
+                int newCol = object.newRowWrtPlayer(direction);
+                
+                if (object.getFloor().charAt(newRow, newCol) == 'P') {
+                    object.usePotion(newRow, newCol);
+                    object.resetChar(newRow, newCol);
+                } else {
+                    cout << "no potion there, dumbass" << endl;
+                }
+            } else {
+                cout << "wrong input, dumbass" << endl;
+            }
+            
         } else if (command == "a") {
 
         } else {

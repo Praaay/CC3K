@@ -1,7 +1,7 @@
 #ifndef BOOSTATK_H
 #define BOOSTATK_H
 
-#include <potion.h>
+#include "potion.h"
 #include <string>
 using namespace std;
 

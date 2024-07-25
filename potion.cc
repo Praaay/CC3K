@@ -11,3 +11,11 @@ string Potion::getType() {
     return type;
 }
 
+int Potion::getRow() {
+    return row;
+}
+
+int Potion::getCol() {
+    return col;
+}
+

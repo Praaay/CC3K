@@ -1,7 +1,7 @@
 #ifndef WOUNDATK_H
 #define WOUNDATK_H
 
-#include <potion.h>
+#include "potion.h"
 #include <string>
 using namespace std;
 

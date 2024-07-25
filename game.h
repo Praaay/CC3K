@@ -34,8 +34,6 @@ class Game {
     unique_ptr<Player> player;
     unique_ptr<Treasure> treasure;
     
-
-
     Floor floor;
     Level level;
 

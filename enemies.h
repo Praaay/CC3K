@@ -2,19 +2,20 @@
 #define PLAYER_H
 
 #include "character.h"
+#include <string>
 
 class Player;
 
 class Enemies : public Character {
     protected:
-    bool hasMoved;  
+    bool hasMoved;
 
     public:
-    Enemies(int x , int y);
-    virtual void attack(Player *) = 0;
-    virtual void attackedBy(Player *) = 0;
+    Enemies(int row, int col, int atk, int def, int hp, std::string race, char display);
+    virtual void attack(Player *);
+
     virtual void dropGold();
-    //void move(Floor floor, std::string direction) override;
+    //void move(Floor floor, std::string direction, char symbol) override;
     void gg() override;   
     virtual ~Enemies();
 };

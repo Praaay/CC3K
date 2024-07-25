@@ -4,9 +4,8 @@
 
 class Elf : public Enemies {
     public:
-     Elf(int x , int y);
+     Elf(int row, int col);
      void attack(Player *) override;
-     void attackedBy(Player * ) override;
      void dropGold() override;
      ~Elf();
 };

@@ -15,6 +15,12 @@
 #include "floor.h"
 #include "treasure.h"
 
+#include "drow.h"
+#include "vampire.h"
+#include "troll.h"
+#include "shade.h"
+#include "goblins.h"
+
 using namespace std;
 
 class Game {
@@ -26,9 +32,10 @@ class Game {
     Floor floor;
     public:
   //  Game(Floor &floor);
-    Game();
+    Game(std::string tmp_race);
     Floor getFloor();
 
+    void setPlayerRace(std::string race);
     void moveplayer(std::string direction);
     void render();
     void getTick();

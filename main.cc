@@ -34,10 +34,10 @@ bool determineDirection(string &dir, string &cmd) { //  return true if the comma
 int main(int argc, char const *argv[]) {
 
 
-    Game object;
+  //  Game object;
     string command;
     string direction;
-
+    string race;
 
 
     // Floor newfloor = object.getFloor();
@@ -51,20 +51,24 @@ int main(int argc, char const *argv[]) {
     cin >> command;
 
     if (command == "d") {
-
+        race = "Drow";
     } else if (command == "g") {
-
+        race = "Goblin";
     } else if (command == "s") {
-
+        race = "Shade";
     } else if (command == "t") {
-
+        race = "Troll";
     } else  if (command == "v") {
-
+        race = "Vampire";
     }
-    
+
+
+    Game object(race);
     object.newGame();
+
     std::cout << "\x1B[2J\x1B[H";
     object.render();
+    cout<<"Action: Player character has spawned"<<endl;
 
 //    cout<<newfloor.charAt(3,5);
 
@@ -72,9 +76,31 @@ int main(int argc, char const *argv[]) {
 
         if (determineDirection(direction, command)) {  //  return true if the command is a direction
             cout<<direction;
+
+            std::string tmp_dir;
             object.moveplayer(direction);
             std::cout << "\x1B[2J\x1B[H";
             object.render();
+
+            if (direction == "no") {
+                tmp_dir = "North";
+            } else if (direction == "so") {
+                tmp_dir = "South";
+            } else if (direction == "ea") {
+                tmp_dir = "East";
+            } else if (direction == "we") {
+                tmp_dir = "West";
+            } else if (direction == "ne") {
+                tmp_dir = "NorthEast";
+            } else if (direction == "nw") {
+                tmp_dir = "NorthWest";         
+            } else if (direction == "se") {
+                tmp_dir = "SouthEast";
+            } else if (direction == "sw") {
+                tmp_dir = "SouthWest";
+            }
+
+            cout<<"Action: Player moves "<<tmp_dir<<endl;
         } else if (command == "u") {
 
         } else if (command == "a") {

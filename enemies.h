@@ -11,9 +11,9 @@ class Enemies : public Character {
     bool hasMoved;
 
     public:
-    Enemies(int row, int col, bool hasMoved, int atk, int def, int hp, std::string race, char display);
+    Enemies(int row, int col, int atk, int def, int hp, std::string race, char display);
     virtual void attack(Player *);
-    virtual void attackedBy(Player *);
+
     virtual void dropGold();
     //void move(Floor floor, std::string direction, char symbol) override;
     void gg() override;   

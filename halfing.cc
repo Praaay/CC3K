@@ -1,12 +1,6 @@
 #include "halfing.h"
 
-Halfing::Halfing(int x , int y) : Enemies{x,y} {
-    hp = 100;
-    atk = 15;
-    def = 20;
-}
+Halfing::Halfing(int row, int col) : Enemies{row, col, 15, 20, 100, "Halfling", 'L'} { }
 
-// void Halfing::attack(Player *) {}
-void Halfing::attackedBy(Player *) {}
 void Halfing::dropGold() {}
 Halfing::~Halfing() {}

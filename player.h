@@ -13,6 +13,8 @@ class Player : public Character {
     std::string race;
     int goldCount; 
 
+    int BACount, BDCount, WACount, WDCount;  // track the count of potion used
+
     public:
     Player(int x , int y);
     virtual void attack(std::string direction);
@@ -26,6 +28,20 @@ class Player : public Character {
     std::string getRace();
     void gg() override; 
     virtual ~Player();  
+
+
+    void resetPotionEffect();  // remove the effect of potions
+    int getBACount();
+    int getBDCount();
+    int getWACount();
+    int getWDCount();
+
+    void setBACount(int count);
+    void setBDCount(int count);
+    void setWACount(int count);
+    void setWDCount(int count);
+
+
 };
 
 #endif

@@ -1,7 +1,7 @@
 #include "character.h"
 #include <string.h>
 
-Character::Character(char display, int x , int y) : symbol{display} , row{x}, col{y} {}
+Character::Character(char display, int x , int y) : row{x}, col{y}, symbol{display} {}
 
 int Character::getAtk() {
     return atk;

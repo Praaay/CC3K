@@ -12,8 +12,11 @@
 
 // #include <level.h>
 // #include <potion.h>
+#include "abstractlevel.h"
+#include "level.h"
 #include "floor.h"
 #include "treasure.h"
+
 
 #include "drow.h"
 #include "vampire.h"
@@ -29,7 +32,14 @@ class Game {
     // unique_ptr<Potions*> potions;
     protected:
     unique_ptr<Player> player;
+    unique_ptr<Treasure> treasure;
+    
+
+
     Floor floor;
+    Level level;
+
+
     public:
   //  Game(Floor &floor);
     Game(std::string tmp_race);
@@ -43,6 +53,7 @@ class Game {
     void newGame();
     void nextFloor();
     void printMessage();
+    void pickupPlayerGold();
 };
 
 

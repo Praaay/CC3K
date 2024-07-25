@@ -3,11 +3,17 @@
 Player::Player(int x , int y) : Character{'@',x,y} {
     goldCount = 0;
     race = "drow";
+    isPlayer = true;
 }
 
 // void Player::move(Floor floor, std::string direction) {
 
 // }
+
+void Player::pickupGold(std::unique_ptr<Treasure> treasure) {
+    int newGoldCount = treasure->getValue();
+    goldCount += newGoldCount;
+}
 
 int Player::getGold() {
     return goldCount;

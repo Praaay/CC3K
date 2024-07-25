@@ -13,8 +13,11 @@
 
 #include "level.h"
 #include "potion.h"
+#include "abstractlevel.h"
+#include "level.h"
 #include "floor.h"
 #include "treasure.h"
+
 
 #include "drow.h"
 #include "vampire.h"
@@ -31,10 +34,12 @@ class Game {
     vector<unique_ptr<Potion> > potions;  // dumbass michael wants this
     Level level;
     unique_ptr<Player> player;
+    std::vector<unique_ptr<Treasure> > treasure;
+    
+
+
     Floor floor;
-
-
-  public:
+    public:
   //  Game(Floor &floor);
     Game(std::string tmp_race);
     Floor getFloor();
@@ -51,7 +56,6 @@ class Game {
     void newGame();
     void nextFloor();
     void printMessage();
-    
 };
 
 

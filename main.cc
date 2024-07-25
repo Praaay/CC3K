@@ -68,7 +68,7 @@ int main(int argc, char const *argv[]) {
     object.newGame();
 
 
-    std::cout << "\x1B[2J\x1B[H";
+//    std::cout << "\x1B[2J\x1B[H";
     object.render();
     cout<<"Action: Player character has spawned"<<endl;
 

@@ -1,16 +1,8 @@
 #include "drow.h"
 
-Drow::Drow(int x , int y) : Player{x,y} {
-    hp = 150;
-    atk = 25;
-    def = 15;
-}
+Drow::Drow(int row, int col) : Player{row, col, 25, 15, 150, "Drow"} {}
 
 void Drow::attack(std::string direction) {
-
-}
-
-void Drow::attackedBy(Enemies * enemy) {
 
 }
 

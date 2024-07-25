@@ -1,17 +1,10 @@
 #include "vampire.h"
 
-Vampire::Vampire(int x , int y) : Player{x,y} {
-    hp = 50;
-    atk = 25;
-    def = 25;
-}
+Vampire::Vampire(int row, int col) : Player{row, col, 25, 25, 50, "Vampire"} {}
 
 void Vampire::attack(std::string direction) {
 
 }
 
-void Vampire::attackedBy(Enemies * enemy) {
-    
-}
 
 Vampire::~Vampire() {}

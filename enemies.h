@@ -3,8 +3,8 @@
 
 #include "character.h"
 #include <string>
+#include "player.h"
 
-class Player;
 
 class Enemies : public Character {
     protected:
@@ -12,7 +12,7 @@ class Enemies : public Character {
 
     public:
     Enemies(int row, int col, int atk, int def, int hp, std::string race, char display);
-    virtual void attack(Player *);
+    virtual void attack(Player *player);
 
     virtual void dropGold();
     //void move(Floor floor, std::string direction, char symbol) override;

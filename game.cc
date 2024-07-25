@@ -50,7 +50,7 @@ void Game::printMessage() {
 }
 
 void Game::moveplayer(std::string direction) {
-    player->move(floor,direction);
+    player->move(floor,direction, '@');
 }
 
 

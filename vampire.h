@@ -4,9 +4,8 @@
 
 class Vampire : public Player {
     public:
-    Vampire(int x , int y);
+    Vampire(int row, int col);
     void attack(std::string direction) override;
-    void attackedBy(Enemies * enemy ) override;
      ~Vampire();
 };
 

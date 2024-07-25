@@ -1,17 +1,10 @@
 #include "goblins.h"
 
-Goblin::Goblin(int x , int y) : Player{x,y} {
-    hp = 110;
-    atk = 15;
-    def = 20;
-}
+Goblin::Goblin(int row, int col) : Player{row, col, 15, 20, 110, "Goblin"} {}
 
 void Goblin::attack(std::string direction) {
 
 }
 
-void Goblin::attackedBy(Enemies * enemy) {
-    
-}
 
 Goblin::~Goblin() {}

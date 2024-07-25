@@ -1,7 +1,7 @@
 #ifndef WOUNDDEF_H
 #define WOUNDDEF_H
 
-#include <potion.h>
+#include "potion.h"
 #include <string>
 using namespace std;
 

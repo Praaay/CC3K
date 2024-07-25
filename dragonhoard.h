@@ -3,9 +3,8 @@
 #include "treasure.h"
 
 class DragonHoard : public Treasure{
-
-
-
+    public:
+    DragonHoard(int row, int col);
 };
 
 

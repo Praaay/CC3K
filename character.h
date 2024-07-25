@@ -11,6 +11,7 @@ class Character {
     int row;
     int col;
     char symbol;
+    bool isPlayer;
 
     public: 
     Character(char display, int x , int y);

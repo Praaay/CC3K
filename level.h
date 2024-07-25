@@ -1,10 +1,13 @@
 #ifndef LEVEL_H
 #define LEVEL_H
+
 #include "abstractlevel.h"
 #include "PRNG.h"
 
+
 class Level : public Abstractlevel {
     
+
     public:
     Level();
     void generatePotion() override;
@@ -16,6 +19,7 @@ class Level : public Abstractlevel {
     void generateEnemies() override;
     void generatePlayers() override;
     ~Level();
+
 };
 
 #endif

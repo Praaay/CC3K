@@ -41,3 +41,46 @@ void Player::attackedBy(Enemies * enemy ) {
 Player::~Player() {
     
 }
+
+
+
+
+
+void Player::resetPotionEffect() {
+    setAtk(getAtk() - (POTION_VAL * BACount));
+    setAtk(getAtk() + (POTION_VAL * WACount));
+    setDef(getDef() - (POTION_VAL * BDCount));
+    setDef(getDef() + (POTION_VAL * WDCount));
+
+    BACount = 0;
+    BDCount = 0;
+    WACount = 0;
+    WDCount = 0;
+}
+
+int Player::getBACount() {
+    return BACount;
+}
+int Player::getBDCount() {
+    return BDCount;
+}
+int Player::getWACount() {
+    return WACount;
+}
+int Player::getWDCount() {
+    return WDCount;
+}
+void Player::setBACount(int count) {
+    BACount = count;
+}
+void Player::setBDCount(int count) {
+    BDCount = count;
+}
+void Player::setWACount(int count) {
+    WACount = count;
+}
+void Player::setWDCount(int count) {
+    WDCount = count;
+}
+
+

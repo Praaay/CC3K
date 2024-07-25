@@ -2,6 +2,7 @@
 #define ABSTRACTLEVEL_H
 
 #include <memory>
+#include "potion.h"
 #include <vector>
 #include "treasure.h"
 
@@ -15,7 +16,8 @@ using namespace std;
 class Abstractlevel {
 
     protected:
-    std::vector<unique_ptr<Treasure>> treasure;
+    vector<unique_ptr<Potion> > potions;
+    std::vector<unique_ptr<Treasure> > treasure;
 
     public:
     Abstractlevel();
@@ -25,6 +27,8 @@ class Abstractlevel {
     virtual void generateEnemies() = 0;
     virtual void generatePlayers() = 0;
     virtual ~Abstractlevel();
+
+    vector<unique_ptr<Potion> > getPotions();
 };
 
 #endif

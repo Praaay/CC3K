@@ -11,8 +11,12 @@ class Potion {
     int row, col;
   public:
     Potion(int row, int col, int value, string type);
+
     int getVal();
     string getType();
+
+    int getRow();
+    int getCol();
 
 };
 

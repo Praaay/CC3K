@@ -308,3 +308,10 @@ void Game::getpotions(){
     }
 }
 
+int Game::PlayerAttack(std::string direction){
+    
+
+
+
+
+}

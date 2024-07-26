@@ -33,20 +33,13 @@ void Player::gg() {
         setRace("");
 }
 
-void Player::attack(std::string direction) {
+int Player::attack(Enemies *target) {
 
-}
-
-void Player::attackedBy(Enemies * enemy ) {
-    
 }
 
 Player::~Player() {
     
 }
-
-
-
 
 
 void Player::resetPotionEffect() {

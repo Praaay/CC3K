@@ -1,4 +1,6 @@
 #include "vampire.h"
+#include "enemies.h"
+#include "character.h"
 
 Vampire::Vampire(int x , int y) : Player{x,y} {
     hp = 50;
@@ -6,12 +8,9 @@ Vampire::Vampire(int x , int y) : Player{x,y} {
     def = 25;
 }
 
-void Vampire::attack(std::string direction) {
+int Vampire::attack(Enemies *target) {
 
 }
 
-void Vampire::attackedBy(Enemies * enemy) {
-    
-}
 
 Vampire::~Vampire() {}

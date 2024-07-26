@@ -17,8 +17,8 @@ class Player : public Character {
 
     public:
     Player(int x , int y);
-    virtual void attack(std::string direction);
-    virtual void attackedBy(Enemies * enemy );
+    virtual int attack(Enemies *target);
+
    // void move(Floor floor, std::string direction) override;
 
     void pickupGold(std::unique_ptr<Treasure> treasure);

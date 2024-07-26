@@ -21,6 +21,8 @@ class Enemies : public Character {
     //void move(Floor floor, std::string direction) override;
     bool inRange(Player * player);
     std::string getRace();
+    bool getHasMoved();
+    void setHasMoved(bool newvalue);
   //  void gg() override;   
     virtual ~Enemies();
 };

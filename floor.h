@@ -9,9 +9,10 @@
 
 class Floor{
 
-  std::vector<std::vector<char> > floormap;
+  
   std::vector<std::vector<char> > reference;
   public:
+  std::vector<std::vector<char> > floormap;
     void generateFloor();
     void printFloor();
     char charAt(int x , int y);

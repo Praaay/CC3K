@@ -2,6 +2,7 @@
 
 #include <unistd.h>
 #include <vector>
+
 //Game::Game(Floor &floor) : floor{floor} {}
 
 Game::Game(std::string tmp_race)  {
@@ -26,6 +27,7 @@ Game::Game(std::string tmp_race)  {
     }
 
     isPlayerAlive = true;
+    player->setMerchAttack(false);
 }
 
 bool Game::getPlayerStatus() {
@@ -63,8 +65,23 @@ void Game::newGame() {
         int tempRow = en->getRow();
         int tempCol = en->getCol();
 
-        floor.setChar(tempRow,tempCol,'E');       
+        std::string tempRace = en->getRace();
 
+        if (tempRace == "elf") {
+            floor.setChar(tempRow,tempCol,'E');    
+        } else if (tempRace == "dragon") {
+            floor.setChar(tempRow,tempCol,'D');    
+        } else if (tempRace == "orc") {
+            floor.setChar(tempRow,tempCol,'O');    
+        } else if (tempRace == "merchant") {
+            floor.setChar(tempRow,tempCol,'M');    
+        } else if (tempRace == "halfing") {
+            floor.setChar(tempRow,tempCol,'L');    
+        } else if (tempRace == "human") {
+            floor.setChar(tempRow,tempCol,'H');    
+        } else if (tempRace == "dwarf") {
+            floor.setChar(tempRow,tempCol,'W');    
+        }          
     } 
 
     for(auto& pt : potions) {
@@ -129,13 +146,116 @@ void Game::moveplayer(std::string direction) {
     } 
 
     player->move(floor,direction);
+    randommovement();
+
     int player_row = player->getRow();
     int player_col = player->getCol();
 
-
     attackPlayer();
-    
+}
 
+
+
+std::vector<std::vector<int>> Game::getAllNeighoubourPoints(int curRow, int curCol) {
+    std::vector<std::vector<int>> neighbours;
+    int maxRow = floor.floormap.size();
+    int maxCol = floor.floormap[0].size();
+
+    std::vector<std::pair<int, int>> directions = {
+        {curRow - 1, curCol},      // N
+        {curRow - 1, curCol + 1},  // NE
+        {curRow, curCol + 1},      // E
+        {curRow + 1, curCol + 1},  // SE
+        {curRow + 1, curCol},      // S
+        {curRow + 1, curCol - 1},  // SW
+        {curRow, curCol - 1},      // W
+        {curRow - 1, curCol - 1}   // NW
+    };
+
+    for (const auto& dir : directions) {
+        int newRow = dir.first;
+        int newCol = dir.second;
+        if (newRow >= 0 && newRow < maxRow && newCol >= 0 && newCol < maxCol) {
+            neighbours.push_back({newRow, newCol});
+        }
+    }
+
+    return neighbours;
+}
+
+
+
+void Game::randommovement() {
+    const int levelHeight = 25;
+    const int floorwidth = 79;
+
+    int index = 1;
+
+    for(int i = 0; i < levelHeight; i++){
+   for(int j = 0; j < floorwidth; j++){
+     if (floor.charAt(i,j) == 'E' || floor.charAt(i,j) == 'D'|| floor.charAt(i,j) == 'M'|| floor.charAt(i,j) == 'L' || floor.charAt(i,j) == 'H' || floor.charAt(i,j) == 'O' || floor.charAt(i,j) == 'W') {
+
+        int curRow = i;
+        int curCol = j;
+        std::vector<std::vector<int>> tmp = getAllNeighoubourPoints(curRow,curCol);
+
+        Enemies* enemyAtCurrentPos = nullptr;
+        
+        for (auto n = enemies.begin(); n != enemies.end(); n++) {
+            if((*n)->getRow() == curRow && (*n)->getCol() == curCol ) {
+                enemyAtCurrentPos = (*n).get();
+                break;
+            }
+        }
+
+
+       if (! enemyAtCurrentPos->getHasMoved()) {       
+       while (true) {
+
+        int randIndex = std::rand() % 8; 
+        int newRow = tmp[randIndex][0];
+        int newCol = tmp[randIndex][1];
+
+        if (floor.charAt(newRow,newCol) == '.') {
+
+            char enem_char;
+
+            if (enemyAtCurrentPos->getRace() == "elf") {
+                enem_char = 'E';
+            } else if (enemyAtCurrentPos->getRace() == "dragon") {
+                enem_char = 'D';
+            } else if (enemyAtCurrentPos->getRace() == "dwarf") {
+                enem_char = 'W';
+            } else if (enemyAtCurrentPos->getRace() == "human") {
+                enem_char = 'H';
+            } else if (enemyAtCurrentPos->getRace() == "orc") {
+                enem_char = 'O';    
+            } else if (enemyAtCurrentPos->getRace() == "merchant") {
+                enem_char = 'M';    
+            } else if (enemyAtCurrentPos->getRace() == "halfing") {
+                enem_char = 'L';    
+            }
+            enemyAtCurrentPos->setPosition(newRow,newCol);
+            enemyAtCurrentPos->setHasMoved(true);
+            floor.setChar(newRow,newCol,enem_char);
+            floor.setChar(curRow,curCol,'.');
+            break;
+        }
+    }
+       }
+     }
+   }
+}
+
+for (auto n = enemies.begin(); n != enemies.end(); n++) {
+    (*n)->setHasMoved(false);
+}
+
+
+
+
+
+cout<<"The number of playre is "<<index<<endl;
 
 }
 
@@ -147,24 +267,30 @@ void Game::playerDeath() {
     player->gg();
     player.reset();
     floor.setChar(player_row,player_col,prev_char);
-
-
 }
 
 void Game::attackPlayer() {
     int player_row = player->getRow();
     int player_col = player->getCol();
-    int index = 0;
+
 
     cout<<"The player health before the attck"<<player->getHp()<<endl;
     for (auto it = enemies.begin() ; it != enemies.end(); ++it) {
-        if ((*it)->inRange(player.get())) {  
-     //     cout<<"The player can be attacked "<<index<<endl;    
-          ++index;      
-          (*it)->attack(player.get());    
+        if ((*it)->inRange(player.get())) { 
+
+          if ((*it)->getRace() != "merchant")   {
+            (*it)->attack(player.get());
+
+            if ((*it)->getRace() == "elf" && player->getRace() != "Drow" ) {
+            (*it)->attack(player.get());  
+          }
+          } else if ((*it)->getRace() == "merchant" && player->getMerchAttack()) {
+            (*it)->attack(player.get());
+          } 
+
+         
         }
     }
-    cout<<"The player health after the attck"<<player->getHp()<<endl;
 
     if (player->getHp() <= 0) {
         cout<<"The player shoould die"<<endl;
@@ -308,3 +434,61 @@ void Game::getpotions(){
     }
 }
 
+// std::vector<std::vector<int>> Game::getAllNeighoubourPoints(int curRow, int curCol) {
+
+//     int curRowInc = curRow + 1;
+//     int curRowDec = curRow - 1;
+//     int curColInc = curCol + 1;
+//     int curColDec = curCol - 1;
+
+//     std::vector<std::vector<int>> vec;
+
+//     if ( (floor.charAt(curRowInc, curCol) == '.')  && ( curRow < 25 && 0 <= curRow && curCol < 79 && 0 <= curCol)) { // so
+//        std::vector<int> temp;
+//        temp.push_back(curRowInc);
+//        temp.push_back(curCol);
+//        vec.push_back(temp);
+//     } else if ((floor.charAt(curRowInc, curColInc)  == '.') && ( curRowInc < 25 && 0 <= curRowInc && curColInc < 79 && 0 <= curColInc )) { // se
+//        std::vector<int> temp;
+//        temp.push_back(curRowInc);
+//        temp.push_back(curColInc);
+//        vec.push_back(temp);
+
+//     } else if ((floor.charAt(curRowInc, curColDec)  == '.') && ( curRowInc < 25 && 0 <= curRowInc && curColDec < 79 && 0 <= curColDec )) { // sw
+//         std::vector<int> temp;
+//        temp.push_back(curRowInc);
+//        temp.push_back(curColDec);
+//        vec.push_back(temp);
+
+//     } else if ((floor.charAt(curRowDec, curCol)  == '.') && ( curRowDec < 25 && 0 <= curRowDec && curCol < 79 && 0 <= curCol )) { // no
+//        std::vector<int> temp;
+//        temp.push_back(curRowDec);
+//        temp.push_back(curCol);
+//        vec.push_back(temp);
+
+//     } else if ((floor.charAt(curRowDec, curColInc)  == '.')  && ( curRowDec < 25 && 0 <= curRowDec && curColInc < 79 && 0 <= curColInc )) { // ne
+//         std::vector<int> temp;
+//        temp.push_back(curRowDec);
+//        temp.push_back(curColInc);
+//        vec.push_back(temp);
+
+//     } else if ((floor.charAt(curRowDec, curColDec)  == '.') && ( curRowDec < 25 && 0 <= curRowDec && curColDec < 79 && 0 <= curColDec )) { // nw
+//         std::vector<int> temp;
+//        temp.push_back(curRowDec);
+//        temp.push_back(curColDec);
+//        vec.push_back(temp);
+
+//     } else if ((floor.charAt(curRow, curColInc)  == '.') && ( curRow < 25 && 0 <= curRow && curColInc < 79 && 0 <= curColInc )) { // ea
+//         std::vector<int> temp;
+//        temp.push_back(curRow);
+//        temp.push_back(curColInc);
+//        vec.push_back(temp);
+
+//     } else if ((floor.charAt(curRow, curColDec)  == '.' ) && ( curRow < 25 && 0 <= curRow && curColInc < 79 && 0 <= curColInc )) { // we
+//         std::vector<int> temp;
+//        temp.push_back(curRow);
+//        temp.push_back(curColDec);
+//        vec.push_back(temp);
+
+//     }
+// }

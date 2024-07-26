@@ -14,6 +14,7 @@ class Player : public Character {
     int goldCount; 
 
     int BACount, BDCount, WACount, WDCount;  // track the count of potion used
+    bool isMerchAttack;
 
     public:
     Player(int x , int y);
@@ -41,6 +42,8 @@ class Player : public Character {
     void setWACount(int count);
     void setWDCount(int count);
 
+    bool getMerchAttack();
+    void setMerchAttack(bool status);
 
 };
 

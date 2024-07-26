@@ -4,6 +4,7 @@
 
 Enemies::Enemies(int x , int y) : Character{'E',x,y} {
     isPlayer = false;
+    hasMoved = false;
 }
 void Enemies::dropGold() {}
 // void Enemies::gg(){}
@@ -11,21 +12,33 @@ void Enemies::dropGold() {}
 
 void Enemies::attack(Player * player) {
 
-    int player_def = player->getDef();
-    int player_hp = player->getHp();
-
-    int damage = ceil((100.0 / (100.0 + player_def)) * atk);
-    int new_hp = player_hp - damage;
     int probab = rand();
 
-    if (player_hp > 0 ) {
+    if (player->getHp() > 0 ) {
      if (probab % 2) {
         return;
      } else {
+        int player_def = player->getDef();
+        int player_hp = player->getHp();
+        int damage = ceil((100.0 / (100.0 + player_def)) * atk);
+
+        if (race == "orc" && player->getRace() == "Goblin") {
+            damage = 1.5 * damage;
+        }
+        int new_hp = player_hp - damage;
+
         player->setHp(new_hp);
         
     }
     }
+}
+
+void Enemies::setHasMoved(bool newvalue) {
+    this->hasMoved = newvalue;
+}
+
+bool Enemies::getHasMoved() {
+    return hasMoved;
 }
 
 std::string Enemies::getRace()  {

@@ -47,19 +47,20 @@ class Game {
     unique_ptr<Player> player;
     std::vector<unique_ptr<Treasure> > treasure;
      std::vector<unique_ptr<Enemies> > enemies;
-    
+    std::string playerRace;
 
 
     Floor floor;
     public:
   //  Game(Floor &floor);
-    Game(std::string tmp_race);
+    Game();
     Floor getFloor();
-
+    void setGamePlayerRace(std::string tmp_race);
+    std::string getGamePlayerRace();
     int newRowWrtPlayer(string direction); 
     int newColWrtPlayer(string direction);
     bool isPlayerAlive;
-
+    void coverDragonHoard(int row, int col);
     void resetChar(int row, int col);
     void usePotion(int row, int col);
     void setPlayerRace(std::string race);
@@ -77,7 +78,11 @@ class Game {
     void setPlayerStatus(bool updated_status);
     void spawnDragon();
     void randommovement();
+    void changeFromAttack();
     std::vector<std::vector<int>> getAllNeighoubourPoints(int curRow, int curCol);
+
+    bool getPlayerStatus();
+    void setPlayerStatus(bool updated_status);
 
     void playerattack(int currentRow, int currentCol);
 

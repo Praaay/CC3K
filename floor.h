@@ -17,6 +17,7 @@ class Floor{
     void printFloor();
     char charAt(int x , int y);
     char referenceCharAt(int x , int y);
+    void referenceSetAt(int x, int y, char symbol);
     void setChar(int x , int y, char tmp);
  //   void clearPlayer(int x , int y,char prev);
 };

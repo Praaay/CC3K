@@ -6,7 +6,7 @@ class Dragon : public Enemies {
     Treasure* dragonHoard;
     public:
      Dragon(int x, int y, Treasure* dragonHoard);
-
+     Treasure* getassociatedDH() override;
      void dropGold() override;
      ~Dragon();
 };

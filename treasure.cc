@@ -4,6 +4,7 @@
 Treasure::Treasure(int row, int col) : row{row} , col(col){}
 
 int Treasure::getValue() {
+    if(checklocked()) return 0;
     return value;
 }
 
@@ -26,4 +27,10 @@ int Treasure::getCol() {
 int Treasure::getRow() {
     return row;
 }
+void Treasure::setlocked(){
+    return;
+}
 
+bool Treasure::checklocked(){
+    return false;
+}

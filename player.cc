@@ -13,6 +13,7 @@ Player::Player(int x , int y) : Character{'@',x,y} {
 // }
 
 void Player::pickupGold(std::unique_ptr<Treasure> treasure) {
+    
     int newGoldCount = treasure->getValue();
     goldCount += newGoldCount;
 }
@@ -55,12 +56,16 @@ int Player::attack(Enemies *target) {
    if(result != 0 && target->getRace() == "Merchant"){
         isMerchAttack = true;
    }
-   if(target->getHp() == 0){
+   if(target->getHp() <= 0){
         if(getRace() == "goblin"){
             setGold(getGold() + 5);   
         }
-        if(getRace() == "Merchant"){
+        if(target->getRace() == "merchant"){
             isMerchAttack = true;
+            //generate merchanthoard
+        }
+        if(target->getRace() == "dragon"){
+            target->getassociatedDH()->setlocked();
         }
    }
    return result;

@@ -115,10 +115,10 @@ void Game::printMessage() {
     int atk = player->getAtk();
     int def = player->getDef();
 
-    cout<<"Race: "<<race<<" Gold: "<<goldcount<<endl;
-    cout<<"HP "<<hp<<endl;;
-    cout<<"Atk "<<atk<<endl;
-    cout<<"Def "<<def<<endl;
+    std::cout<<"Race: "<<race<<" Gold: "<<goldcount<<endl;
+    std::cout<<"HP "<<hp<<endl;;
+    std::cout<<"Atk "<<atk<<endl;
+    std::cout<<"Def "<<def<<endl;
     //cout<<"The si ze of the vector is "<<potions.size()<<endl;
 
 }
@@ -266,7 +266,7 @@ for (auto n = enemies.begin(); n != enemies.end(); n++) {
 
 
 
-cout<<"The number of player is "<<index<<endl;
+std::cout<<"The number of player is "<<index<<endl;
 
 }
 
@@ -307,7 +307,7 @@ void Game::attackPlayer() {
         
 
     if (player->getHp() <= 0) {
-        cout<<"The player shoould die"<<endl;
+        std::cout<<"The player shoould die"<<endl;
         // Player* rawPlayer = player.release()
         // delete player;
         setPlayerStatus(false);
@@ -315,26 +315,50 @@ void Game::attackPlayer() {
     }
 }
 
+void Game::coverDragonHoard(int newRow, int newCol){
+    floor.referenceSetAt(newRow, newCol, 'G');
+    floor.setChar(newRow, newCol, '.');
+    for(auto& enemy : enemies){
+        if(enemy->getRace() == "dragon"){
+            Treasure* dragonhoard = enemy->getassociatedDH();
+            if(dragonhoard->getRow() == newRow && dragonhoard->getCol() == newCol){
+                if(enemy->getHp()<= 0){
+                    floor.referenceSetAt(newRow, newCol, '.');
+                }
+                break;
+        }
+        }
+    }
+}
+void Game::changeFromAttack(){
+    for(auto& enemy: enemies){
+        if(enemy->getHp()<= 0){
+            floor.setChar(enemy->getRow(), enemy->getCol(), '.');
+        }
+    }
+}
 void Game::pickupPlayerGold(int newRow,int newCol){
- 
-        
         for(auto it = treasure.begin(); it != treasure.end(); ++it){
-        int tempRow = (*it)->getRow();
-        int tempCol = (*it)->getCol();
+            int tempRow = (*it)->getRow();
+            int tempCol = (*it)->getCol();
 
         if (tempRow == newRow && tempCol == newCol) {
-            cout<<" The type of treasure is "<< (*it)->getGoldType()<<endl;
+            std::cout<<" The type of treasure is "<< (*it)->getGoldType()<<endl;
             //pickup
-            
-            unique_ptr<Treasure> tmp_treasure = std::move(*it);
-   
-            player->pickupGold(std::move(tmp_treasure));
-            
-            char treasure_ref = floor.referenceCharAt(newRow,newCol);
-            
-            floor.setChar(tempRow,tempCol,treasure_ref);
-            it = treasure.erase(it);
-            break;
+            if((*it)->getGoldType() == "dragonhoard"){
+                coverDragonHoard(newRow, newCol);
+            }
+            else{
+                unique_ptr<Treasure> tmp_treasure = std::move(*it);
+    
+                player->pickupGold(std::move(tmp_treasure));
+                
+                char treasure_ref = floor.referenceCharAt(newRow,newCol);
+                
+                floor.setChar(tempRow,tempCol,treasure_ref);
+                it = treasure.erase(it);
+                break;
+            }
         }
     }
 }
@@ -400,8 +424,8 @@ void Game::usePotion(int row, int col) {
         }
     }
 
-    cout << "row: " << row << " col: " << col << endl;
-    cout << "type: " << type <<  " val: " << val << endl;
+    std::cout << "row: " << row << " col: " << col << endl;
+    std::cout << "type: " << type <<  " val: " << val << endl;
 
     // apply potion and record usage
     if (type == "RH" || type == "PH") {
@@ -422,8 +446,8 @@ void Game::usePotion(int row, int col) {
         player->setDef(player->getDef() + val);
     }
 
-    cout << "row: " << row << " col: " << col << endl;
-    cout << "type: " << type <<  " val: " << val << endl;
+    std::cout << "row: " << row << " col: " << col << endl;
+    std::cout << "type: " << type <<  " val: " << val << endl;
 
     for (auto ps = potions.begin(); ps != potions.end(); ++ps) {
         if ((*ps)->getRow() == row && (*ps)->getCol() == col) {
@@ -432,8 +456,8 @@ void Game::usePotion(int row, int col) {
         }
     }
 
-    cout << "row: " << row << " col: " << col << endl;
-    cout << "type: " << type <<  " val: " << val << endl;
+    std::cout << "row: " << row << " col: " << col << endl;
+    std::cout << "type: " << type <<  " val: " << val << endl;
 
 }
 
@@ -444,7 +468,7 @@ void Game::resetChar(int row, int col) {
 
 void Game::getpotions(){
     for(int i = 0; i < potions.size(); i++){
-        cout << "row: " << potions[i]->getRow() << " col: " << potions[i]->getCol() << endl;
+        std::cout << "row: " << potions[i]->getRow() << " col: " << potions[i]->getCol() << endl;
     }
 }
 

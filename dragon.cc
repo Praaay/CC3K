@@ -7,5 +7,9 @@ Dragon::Dragon(int x , int y, Treasure* dragonHoard) : Enemies{x,y}, dragonHoard
     def = 20;
 }
 
+Treasure* Dragon::getassociatedDH(){
+    return dragonHoard;
+}
+
 void Dragon::dropGold() {}
 Dragon::~Dragon() {}

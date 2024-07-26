@@ -3,8 +3,11 @@
 #include "treasure.h"
 
 class DragonHoard : public Treasure{
+    bool locked;
     public:
     DragonHoard(int row, int col);
+    bool checklocked() override;
+    void setlocked() override;
 };
 
 

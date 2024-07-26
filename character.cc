@@ -79,8 +79,9 @@ void Character::move(Floor &floor, std::string direction) {
     // std::cout<<"the row from the character class is "<<newRow;
    // std::cout<<"The prev char is "<<prev;
 
-   if (floor.charAt(newRow,newCol) == '.' || floor.charAt(newRow,newCol) == '#'  || floor.charAt(newRow,newCol) == '\\' || floor.charAt(newRow,newCol) == '+' ) {
+   if (floor.charAt(newRow,newCol) == '.' || floor.charAt(newRow,newCol) == '#'  || floor.charAt(newRow,newCol) == '\\' || floor.charAt(newRow,newCol) == '+') {
     char reference = floor.referenceCharAt(row,col);
+
     floor.setChar(row,col,reference);
     setPosition(newRow,newCol);
     floor.setChar(newRow,newCol,'@');

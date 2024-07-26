@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include <cmath> 
 #include <unistd.h>
 #include <vector>
 
@@ -11,6 +12,7 @@ Game::Game()  {
 
 
     isPlayerAlive = true;
+    
    
 }
 
@@ -37,6 +39,7 @@ Floor Game::getFloor() {
 
 void Game::newGame(){
     levelnumber = 0;
+    isEnemyMove = true;
     newLevel();
 }
 
@@ -159,7 +162,9 @@ void Game::moveplayer(std::string direction) {
 
     player->move(floor,direction);
 
-    randommovement();
+    if (isEnemyMove) {
+     randommovement();
+    }
 
     int player_row = player->getRow();
     int player_col = player->getCol();
@@ -167,6 +172,10 @@ void Game::moveplayer(std::string direction) {
 
     attackPlayer();
     player->additionalAbility();
+}
+
+void Game::stopEnemy() {
+    isEnemyMove = false;
 }
 
 
@@ -267,7 +276,7 @@ for (auto n = enemies.begin(); n != enemies.end(); n++) {
     (*n)->setHasMoved(false);
 }
 
-cout<<"The number of playre is "<<index<<endl;
+//cout<<"The number of playre is "<<index<<endl;
 
 }
 
@@ -388,6 +397,11 @@ int Game::newColWrtPlayer(string direction) {
 void Game::usePotion(int row, int col) {
     string type;
     int val;
+    int boost = 1;
+
+    if (playerRace == "Drow") {
+        boost = 1.5;
+    }
 
     // find the potion we're dealing with
     for (auto& ps : potions) {
@@ -398,30 +412,30 @@ void Game::usePotion(int row, int col) {
         }
     }
 
-    cout << "row: " << row << " col: " << col << endl;
-    cout << "type: " << type <<  " val: " << val << endl;
+    // cout << "row: " << row << " col: " << col << endl;
+    // cout << "type: " << type <<  " val: " << val << endl;
 
     // apply potion and record usage
     if (type == "RH" || type == "PH") {
-        player->setHp(player->getHp() + val);
+        player->setHp(boost * (player->getHp() + val));
     } else if (type == "BA" || type == "WA") {
         if (type == "BA") {
-            player->setBACount(player->getBACount() + 1);
+            player->setBACount(boost * (player->getBACount() + 1));
         } else {  // "WA"
-            player->setWACount(player->getWACount() + 1);
+            player->setWACount(boost * (player->getWACount() + 1));
         }
-        player->setAtk(player->getAtk() + val);
+        player->setAtk(boost * (player->getAtk() + val));
     } else if (type == "BD" || type == "WD") {
         if (type == "BD") {
-            player->setBDCount(player->getBDCount() + 1);
+            player->setBDCount(boost * (player->getBDCount() + 1));
         } else {  // "WD"
-            player->setWDCount(player->getWDCount() + 1);
+            player->setWDCount(boost * (player->getWDCount() + 1));
         }
-        player->setDef(player->getDef() + val);
+        player->setDef(boost * (player->getDef() + val));
     }
 
-    cout << "row: " << row << " col: " << col << endl;
-    cout << "type: " << type <<  " val: " << val << endl;
+    // cout << "row: " << row << " col: " << col << endl;
+    // cout << "type: " << type <<  " val: " << val << endl;
 
     for (auto ps = potions.begin(); ps != potions.end(); ++ps) {
         if ((*ps)->getRow() == row && (*ps)->getCol() == col) {
@@ -430,8 +444,8 @@ void Game::usePotion(int row, int col) {
         }
     }
 
-    cout << "row: " << row << " col: " << col << endl;
-    cout << "type: " << type <<  " val: " << val << endl;
+    // cout << "row: " << row << " col: " << col << endl;
+    // cout << "type: " << type <<  " val: " << val << endl;
 
 }
 
@@ -456,12 +470,20 @@ void Game::playerattack(int currentRow, int currentCol){
         if(enemies[i]->getRow() == currentRow && enemies[i] ->getCol() == currentCol){
             isEnemy = true;
             target = enemies[i].get();
+
         }
     } 
     if(isEnemy){
         //cout<<"The player health before the attack: "<<target->getHp()<<endl;
         int val = player->attack(target);
         //cout<<"The player health after the attack: "<<target->getHp()<<endl;
+
+        if (target->getHp() <= 0 ) {
+              int tmp_row = target->getRow();
+              int tmp_col = target->getCol();
+              enemyDeath(tmp_row,tmp_col);
+        }
+
         if(val == 0){
             std::cout << "Missed the attack." << std::endl;
         }
@@ -473,6 +495,35 @@ void Game::playerattack(int currentRow, int currentCol){
         std::cout << "No enemy in this direction" << std::endl;
     }
 }
+
+void Game::enemyDeath(int tmp_row, int tmp_col) {
+
+    for(auto n = enemies.begin(); n != enemies.end(); n++ ) {
+
+        if((*n)->getRow() == tmp_row && (*n)->getCol() == tmp_col) {
+
+            if((*n)->getRace() != "dragonhoard" && (*n)->getRace() != "human" && (*n)->getRace() != "merchant" ) {
+                int value = std::rand() % 2;
+                int curGold = player->getGold();
+
+                if (value == 0) {
+                    curGold = curGold + 2;
+                    player->setGold(curGold);
+                } else {
+                    curGold = curGold + 1;
+                    player->setGold(curGold);
+                }
+            }
+            n = enemies.erase(n);
+        } else {
+            ++n;
+        }
+    }
+    char reference = floor.referenceCharAt(tmp_row,tmp_col);
+    floor.setChar(tmp_row,tmp_col,reference);
+}
+
+
 
 void Game::spawnDragon(){
     int row;

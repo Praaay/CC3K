@@ -460,12 +460,17 @@ void Game::playerattack(int currentRow, int currentCol){
         if(enemies[i]->getRow() == currentRow && enemies[i] ->getCol() == currentCol){
             isEnemy = true;
             target = enemies[i].get();
+
         }
     } 
     if(isEnemy){
         //cout<<"The player health before the attack: "<<target->getHp()<<endl;
         int val = player->attack(target);
         //cout<<"The player health after the attack: "<<target->getHp()<<endl;
+
+        if (target->getHp() <= 0 ) {
+                
+        }
         if(val == 0){
             std::cout << "Missed the attack." << std::endl;
         }
@@ -477,6 +482,8 @@ void Game::playerattack(int currentRow, int currentCol){
         std::cout << "No enemy in this direction" << std::endl;
     }
 }
+
+
 
 void Game::spawnDragon(){
     int row;

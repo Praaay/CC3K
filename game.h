@@ -70,6 +70,9 @@ class Game {
     int getLevelNumber();
     void setLevelNumber(int new_level);
 
+    void enemyDeath();
+
+    
     void resetChar(int row, int col);
     void usePotion(int row, int col);
     void setPlayerRace(std::string race);

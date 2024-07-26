@@ -7,7 +7,5 @@ Human::Human(int x , int y) : Enemies{x,y} {
     def = 20;
 }
 
-// void Human::attack(Player *) {}
-void Human::attackedBy(Player *) {}
 void Human::dropGold() {}
 Human::~Human() {}

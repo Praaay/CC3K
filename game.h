@@ -75,8 +75,12 @@ class Game {
     void playerDeath();
     bool getPlayerStatus();
     void setPlayerStatus(bool updated_status);
+
     void randommovement();
     std::vector<std::vector<int>> getAllNeighoubourPoints(int curRow, int curCol);
+
+    void playerattack(int currentRow, int currentCol);
+
 };
 
 

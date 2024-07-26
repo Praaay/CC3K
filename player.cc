@@ -1,4 +1,6 @@
 #include "player.h"
+#include "character.h"
+#include "enemies.h"
 
 Player::Player(int x , int y) : Character{'@',x,y} {
     goldCount = 0;
@@ -41,21 +43,30 @@ void Player::gg() {
         setRace("");
 }
 
-void Player::attack(std::string direction) {
+int Player::attack(Enemies *target) {
+   if (target->getRace() == "Halfling"){
+       int val = rand() % 2;
+       if(val) return 0;
+   }
+   int result = 0;
+   result = ceil((100.0 / (100.0 + target->getDef())) * getAtk());
+   target->setHp(target->getHp() - result);
 
+   if(result != 0 && target->getRace() == "Merchant"){
+        isMerchAttack = true;
+   }
+   if(target->getHp() == 0){
+        if(getRace() == "goblin"){
+            setGold(getGold() + 5);   
+        }
+        if(getRace() == "Merchant"){
+            isMerchAttack = true;
+        }
+   }
+   return result;
 }
 
-void Player::attackedBy(Enemies * enemy ) {
-    
-}
-
-Player::~Player() {
-    
-}
-
-
-
-
+Player::~Player() {}
 
 void Player::resetPotionEffect() {
     setAtk(getAtk() - (POTION_VAL * BACount));

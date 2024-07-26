@@ -7,7 +7,5 @@ Elf::Elf(int x , int y) : Enemies{x,y} {
     def = 10;
 }
 
-// void Elf::attack(Player *) {}
-void Elf::attackedBy(Player * enemy) {}
 void Elf::dropGold() {}
 Elf::~Elf() {}

@@ -7,7 +7,6 @@ Merchant::Merchant(int x , int y) : Enemies{x,y} {
     def = 5;
 }
 
-// void Merchant::attack(Player *) {}
-void Merchant::attackedBy(Player *) {}
+
 void Merchant::dropGold() {}
 Merchant::~Merchant() {}

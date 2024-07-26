@@ -6,9 +6,10 @@
 using namespace std;
 
 class Potion {
-    int val;
+  
     string type;
     int row, col;
+    int val;
   public:
     Potion(int row, int col, int value, string type);
 

@@ -107,6 +107,44 @@ vector<int> Level::randomCoordinates() {
 
 }
 
+void Level::generatePlayers(Floor &floor, std::string tmp_race) {
+
+       vector<int> location = randomCoordinates();
+        int row = location[0];
+        int col = location[1];
+
+        
+        //player =  make_unique<Drow>(row,col);
+
+        // int tmp_row = player->getRow();
+        // int tmp_col = player->getCol();
+
+
+    if (tmp_race == "Drow") {
+        player = make_unique<Drow>(row,col);
+        player->setRace("Drow");
+    } else if (tmp_race == "Vampire") {
+        player = make_unique<Vampire>(row,col);
+        player->setRace("Vampire");
+    } else if (tmp_race == "Goblin") {
+        player = make_unique<Goblin>(row,col);
+        player->setRace("Goblin");
+    } else if (tmp_race == "Shade") {
+        player = make_unique<Shade>(row,col);
+        player->setRace("Shade");
+    } else if (tmp_race == "Troll") {
+        player = make_unique<Troll>(row,col);
+        player->setRace("Troll");
+    }
+       
+
+    floor.setChar(row,col,'@');
+}
+
+unique_ptr<Player> Level::getPlayer() {
+    return std::move(player);
+}
+
 void Level::generatePotion() {
 
 
@@ -215,6 +253,6 @@ vector<unique_ptr<Treasure>> Level::getTreasure() {
 }
 
 
-void Level::generatePlayers() {}
+// void Level::generatePlayers() {}
 Level::~Level() {}
 

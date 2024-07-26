@@ -8,25 +8,9 @@
 
 Game::Game(std::string tmp_race)  {
 
-    if (tmp_race == "Drow") {
-        player = make_unique<Drow>(4,5);
-        setPlayerRace("Drow");
-    } else if (tmp_race == "Vampire") {
-        player = make_unique<Vampire>(4,5);
-        setPlayerRace("Vampire");
-        potions.emplace_back(make_unique<Potion>(3, 7, 5, "WD"));
-
-    } else if (tmp_race == "Goblin") {
-        player = make_unique<Goblin>(4,5);
-        setPlayerRace("Goblin");
-    } else if (tmp_race == "Shade") {
-        player = make_unique<Shade>(4,5);
-        setPlayerRace("Shade");
-    } else if (tmp_race == "Troll") {
-        player = make_unique<Troll>(4,5);
-        setPlayerRace("Troll");
-    }
-
+    floor.generateFloor();
+    level.generatePlayers(floor,tmp_race);
+    player = level.getPlayer();
     isPlayerAlive = true;
     player->setMerchAttack(false);
 }
@@ -43,7 +27,7 @@ Floor Game::getFloor() {
     return floor;
 }
 void Game::newGame() {
-    floor.generateFloor();
+    
     level.generateTreasure();
 
     level.generateEnemies();

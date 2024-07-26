@@ -43,20 +43,22 @@ int Player::attack(Enemies *target) {
    int result = 0;
    result = ceil((100.0 / (100.0 + target->getDef())) * getAtk());
    target->setHp(target->getHp() - result);
-  
+
+   if(result != 0 && target->getRace() == "Merchant"){
+        isMerchAttack = true;
+   }
    if(target->getHp() == 0){
         if(getRace() == "goblin"){
             setGold(getGold() + 5);   
         }
+        if(getRace() == "Merchant"){
+            isMerchAttack = true;
+        }
    }
    return result;
-  
 }
 
-Player::~Player() {
-    
-}
-
+Player::~Player() {}
 
 void Player::resetPotionEffect() {
     setAtk(getAtk() - (POTION_VAL * BACount));

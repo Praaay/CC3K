@@ -6,12 +6,4 @@ Shade::Shade(int x , int y) : Player(x,y) {
     def = 25;
 }
 
-void Shade::attack(std::string direction) {
-
-}
-
-void Shade::attackedBy(Enemies * enemy) {
-    
-}
-
 Shade::~Shade() {}

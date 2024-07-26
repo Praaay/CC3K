@@ -18,6 +18,7 @@ int Vampire::attack(Enemies *target) {
            setHp(getHp() + 5);
        }
    }
+   return result;
 }
 
 Vampire::~Vampire() {}

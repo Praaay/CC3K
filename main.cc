@@ -50,18 +50,28 @@ int main(int argc, char const *argv[]) {
     cout << "Shade : 's'" << endl;
     cout << "Troll : 't'" << endl;
     cout << "Vampire : 'v'" << endl;
-    cin >> command;
-
-    if (command == "d") {
-        race = "Drow";
-    } else if (command == "g") {
-        race = "Goblin";
-    } else if (command == "s") {
-        race = "Shade";
-    } else if (command == "t") {
-        race = "Troll";
-    } else  if (command == "v") {
-        race = "Vampire";
+    
+    while(true){
+        cin >> command;
+        if (command == "d") {
+            race = "Drow";
+            break;
+        } else if (command == "g") {
+            race = "Goblin";
+            break;
+        } else if (command == "s") {
+            race = "Shade";
+            break;
+        } else if (command == "t") {
+            race = "Troll";
+            break;
+        } else  if (command == "v") {
+            race = "Vampire";
+            break;
+        }
+        else{
+            std::cout << "Wrong input. Input again" << std::endl;
+        }
     }
 
     Game object(race);
@@ -121,14 +131,14 @@ int main(int argc, char const *argv[]) {
                     object.usePotion(newRow, newCol);
                     object.resetChar(newRow, newCol);
 
-                    object.render();
+                    // object.render();
                     cout << "Used a potion" << endl;
                 } else {
-                    object.render();
+                    // object.render();
                     cout << "no potion there, dumbass" << endl;
                 }
             } else {
-                object.render();
+                // object.render();
                 cout << "wrong input, dumbass" << endl;
             }
             
@@ -139,10 +149,10 @@ int main(int argc, char const *argv[]) {
                 int newRow = object.newRowWrtPlayer(direction);
                 int newCol = object.newColWrtPlayer(direction);
                 object.playerattack(newRow, newCol);
-                object.render();
+                // object.render();
             }  
             else {
-                object.render();
+                // object.render();
                 cout << "wrong input" << endl;
             }
         } 
@@ -153,7 +163,7 @@ int main(int argc, char const *argv[]) {
             char end; 
 
             while(true){
-                cout<<"The Game is over. Do uu want to continue. Press r to restart the game and q to quit"<< endl;
+                cout<<"The Game is over. Do u want to continue. Press r to restart the game and q to quit"<< endl;
                 cin>>end;
                 if (end == 'r') {
                     object.newGame();

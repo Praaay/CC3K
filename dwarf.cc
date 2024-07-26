@@ -7,7 +7,5 @@ Dwarf::Dwarf(int x , int y) : Enemies{x,y} {
     def = 30;
 }
 
-// void Dwarf::attack(Player *) {}
-void Dwarf::attackedBy(Player * enemy) {}
 void Dwarf::dropGold() {}
 Dwarf::~Dwarf() {}

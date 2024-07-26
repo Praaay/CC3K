@@ -6,12 +6,5 @@ Drow::Drow(int x , int y) : Player{x,y} {
     def = 15;
 }
 
-void Drow::attack(std::string direction) {
-
-}
-
-void Drow::attackedBy(Enemies * enemy) {
-
-}
 
 Drow::~Drow() {}

@@ -5,8 +5,7 @@
 class Vampire : public Player {
     public:
     Vampire(int x , int y);
-    void attack(std::string direction) override;
-    void attackedBy(Enemies * enemy ) override;
+    int attack(Enemies *target) override;
      ~Vampire();
 };
 

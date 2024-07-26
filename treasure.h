@@ -22,6 +22,8 @@ class Treasure {
     std::string getGoldType();
     void setGoldType(std::string goldType);
     void setValue(int value); 
+    virtual bool checklocked();
+    virtual void setlocked();
 };
 
 #endif

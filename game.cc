@@ -12,6 +12,7 @@ Game::Game()  {
 
 
     isPlayerAlive = true;
+    
    
 }
 
@@ -38,6 +39,7 @@ Floor Game::getFloor() {
 
 void Game::newGame(){
     levelnumber = 0;
+    isEnemyMove = true;
     newLevel();
 }
 
@@ -160,13 +162,19 @@ void Game::moveplayer(std::string direction) {
 
     player->move(floor,direction);
 
-    randommovement();
+    if (isEnemyMove) {
+     randommovement();
+    }
 
     int player_row = player->getRow();
     int player_col = player->getCol();
 
 
     attackPlayer();
+}
+
+void Game::stopEnemy() {
+    isEnemyMove = false;
 }
 
 

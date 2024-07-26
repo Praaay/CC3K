@@ -55,6 +55,7 @@ class Game {
 
     Floor floor;
     int levelnumber;
+    bool isEnemyMove;
     public:
   //  Game(Floor &floor);
     Game();
@@ -90,6 +91,7 @@ class Game {
     void setPlayerStatus(bool updated_status);
     void spawnDragon();
     void newLevel();
+    void stopEnemy();
 
     void randommovement();
     std::vector<std::vector<int>> getAllNeighoubourPoints(int curRow, int curCol);

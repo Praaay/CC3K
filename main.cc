@@ -157,7 +157,9 @@ int main(int argc, char const *argv[]) {
                 // object.render();
                 cout << "wrong input" << endl;
             }
-        } 
+        }  else if (command == "f") {
+            object->stopEnemy();
+        }
         
         
         bool playerStatus = object->getPlayerStatus();

@@ -41,10 +41,9 @@ Level::Level() {
         ++row;
     }
 
-    //cout << "sizeof: " << chamber5.size() << endl;
-
-    // for(int i = 0; i < 150; i++) {
-    //     vector<int> temp = chamber5[i];
+    // cout << "sizeof: " << chamber1.size() << endl;
+    // for(int i = 0; i < 104; i++) {
+    //     vector<int> temp = chamber1[i];
     //     cout << "row: " << temp[0] << " col: " << temp[1] << endl;
     // }
 
@@ -66,36 +65,41 @@ int Level::randomChamber() {
     return randomNumberGenerater(1, 5);
 }
 
+vector<int> Level::randomhelper(int len, vector<vector<int>>& chamberNum){
+    int randomNum = randomNumberGenerater(0,len - 1);
+    for (int i = 0; i < len; ++i) {
+        if (i == randomNum) {
+            vector<int> temp = chamberNum[i];
+            chamberNum.erase(chamberNum.begin() + randomNum);
+            return temp;
+        }
+    }
+    vector<int> error = {9999999, 401};
+    return error;
+}
+
 vector<int> Level::randomCoordinates() {
     
     int chamber = randomChamber();
 
-    vector<vector<int> >& theChamber = chamber1;
+
+    //vector<vector<int> >& theChamber = chamber1;
     int len = 0;
     if (chamber == 1) {  //  fetch the chamber and the size of it.
         len = chamber1.size();
+        return randomhelper(len, chamber1);
     } else if (chamber == 2) {
         len = chamber2.size();
-        theChamber = chamber2;
+        return randomhelper(len, chamber2);
     } else if (chamber == 3) {
         len = chamber3.size();
-        theChamber = chamber3;
+        return randomhelper(len, chamber3);
     } else if (chamber == 4) {
         len = chamber4.size();
-        theChamber = chamber4;
+        return randomhelper(len, chamber4);
     } else if (chamber == 5) {
         len = chamber5.size();
-        theChamber = chamber5;
-    }
-
-    int randomNum = randomNumberGenerater(0,len - 1);
-
-    for (int i = 0; i < len; ++i) {
-        if (i == randomNum) {
-            vector<int> temp = theChamber[i];
-            theChamber.erase(theChamber.begin() + randomNum);
-            return temp;
-        }
+        return randomhelper(len, chamber5);
     }
 
     vector<int> error = {9999999, 401};
@@ -107,11 +111,12 @@ void Level::generatePotion() {
 
 
     for (int i = 0; i < 10; i++) {
-        int val = randomNumberGenerater(1, 6);
 
         vector<int> location = randomCoordinates();
         int row = location[0];
         int col = location[1];
+
+        int val = randomNumberGenerater(1, 6);
 
         // cout << "row: " << row << " col: " << col << endl;
 
@@ -145,24 +150,25 @@ void Level::generateEnemies() {}
 void Level::generatetairs() {}
 
 void Level::generateTreasure() {
-    PRNG prng1;
-    uint32_t seed = getpid();
-    prng1.seed(seed);
 
     for (int i = 0; i < 10; i++) {
+        vector<int> location = randomCoordinates();
+        int row = location[0];
+        int col = location[1];
 
-        int value = prng1(1,8);
+        int value = randomNumberGenerater(1,8);
     
         unique_ptr<Treasure> tmp;
 
-    if (1 <= value && value <= 5) {
-        tmp = make_unique<Normal>(3, 15 - i);
-    } else if (5 < value && value <= 6) {
-        tmp = make_unique<DragonHoard>(3, 15 - i);
-    } else if (6 < value && value <= 8) {
-        tmp = make_unique<Small>(3,15 - i);
-    }
-    treasure.push_back(std::move(tmp)); 
+        if (1 <= value && value <= 5) {
+            tmp = make_unique<Normal>(row, col);
+        } else if (5 < value && value <= 6) {
+            tmp = make_unique<DragonHoard>(row, col);
+        } else if (6 < value && value <= 8) {
+            tmp = make_unique<Small>(row, col);
+        }
+        treasure.push_back(std::move(tmp)); 
+       // cout << "size: " << treasure.size() << endl;
     }
 }
 

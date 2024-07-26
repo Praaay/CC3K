@@ -17,6 +17,7 @@ class Level : public Abstractlevel {
     public:
     Level();
 
+    vector<int> randomhelper(int len, vector<vector<int>>& chamberNum);
     int randomNumberGenerater(int from, int to);
 
     int randomChamber();

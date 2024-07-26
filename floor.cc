@@ -24,7 +24,6 @@ void Floor::generateFloor(){
   
 
     setChar(4,5,'@');
-    setChar(3,7,'P');
 }
 
 void Floor::printFloor(){

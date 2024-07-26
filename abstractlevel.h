@@ -31,7 +31,6 @@ class Abstractlevel {
     std::vector<unique_ptr<Treasure> > treasure;
     std::vector<unique_ptr<Enemies> > enemies;
 
-
     public:
     Abstractlevel();
     virtual void generatePotion() = 0;

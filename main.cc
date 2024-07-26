@@ -68,7 +68,7 @@ int main(int argc, char const *argv[]) {
     object.newGame();
 
 
- //   std::cout << "\x1B[2J\x1B[H";
+    std::cout << "\x1B[2J\x1B[H";
     object.render();
     cout << "Action: Player character has spawned"<<endl;
 
@@ -84,7 +84,7 @@ int main(int argc, char const *argv[]) {
 
             string tmp_dir;
             object.moveplayer(direction);
-   //         std::cout << "\x1B[2J\x1B[H";
+            std::cout << "\x1B[2J\x1B[H";
             object.render();
 
             if (direction == "no") {
@@ -106,13 +106,18 @@ int main(int argc, char const *argv[]) {
             }
 
             cout << "Action: Player moves " << tmp_dir << endl;
+
         } else if (command == "u") {
+
             cin >> secondCommand;
+
             if (determineDirection(direction, secondCommand)) {
                 int newRow = object.newRowWrtPlayer(direction);
                 int newCol = object.newColWrtPlayer(direction);
                 
                 if (object.getFloor().charAt(newRow, newCol) == 'P') {
+                    
+                    // object.getpotions();
                     object.usePotion(newRow, newCol);
                     object.resetChar(newRow, newCol);
 
@@ -123,6 +128,7 @@ int main(int argc, char const *argv[]) {
                     cout << "no potion there, dumbass" << endl;
                 }
             } else {
+                object.render();
                 cout << "wrong input, dumbass" << endl;
             }
             

@@ -70,6 +70,7 @@ class Game {
     void printMessage();
     void pickupPlayerGold(int newRow,int newCol);
     void attackPlayer();
+    void getpotions();
 };
 
 

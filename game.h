@@ -56,7 +56,7 @@ class Game {
     void newGame();
     void nextFloor();
     void printMessage();
-    void pickupPlayerGold();
+    void pickupPlayerGold(int newRow,int newCol);
 };
 
 

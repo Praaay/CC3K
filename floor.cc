@@ -22,7 +22,9 @@ void Floor::generateFloor(){
     }
   //  prev = charAt(3,5);
   
+
     setChar(4,5,'@');
+    setChar(3,7,'P');
 }
 
 void Floor::printFloor(){

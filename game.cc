@@ -98,22 +98,45 @@ void Game::moveplayer(std::string direction) {
         newRow++;
         newCol--;
     }
-
+    
     if (floor.charAt(newRow,newCol) == 'G') {
-        pickupPlayerGold();
+        cout<<"Hello";
+        pickupPlayerGold(newRow,newCol);
     }    
-     
-    player->move(floor,direction);    
+
+   
+    player->move(floor,direction);
+    
 }
 
-void Game::pickupPlayerGold(){
+void Game::pickupPlayerGold(int newRow,int newCol){
+ 
+        // for (const auto &t : treasure) {
+        
+        for(auto it = treasure.begin(); it != treasure.end(); ++it){
+        int tempRow = (*it)->getRow();
+        int tempCol = (*it)->getCol();
 
-    // int treasureRow = treasure->getRow();
-    // int treasureCol = treasure->getCol();
-
-    // player->pickupGold(std::move(treasure));   
-    // char floorChar = floor.referenceCharAt(treasureRow,treasureCol);
-    // floor.setChar(treasureRow,treasureCol,floorChar);
+        if (tempRow == newRow && tempCol == newCol) {
+            cout<<" The type of treasure is "<< (*it)->getGoldType()<<endl;
+            //pickup
+            
+            unique_ptr<Treasure> tmp_treasure = std::move(*it);
+   
+            player->pickupGold(std::move(tmp_treasure));
+            
+            char treasure_ref = floor.referenceCharAt(newRow,newCol);
+            
+            floor.setChar(tempRow,tempCol,treasure_ref);
+            it = treasure.erase(it);
+            break;
+        }
+        // if(it == treasure.end()){
+        //     it = treasure.erase(it);
+        //     break;
+        // }            
+   //     cout << "Treasure at (" << t->getRow() << ", " << t->getCol() << ")" <<" The type of treasure is "<<t->getGoldType()<<endl;
+    }
 }
 
 

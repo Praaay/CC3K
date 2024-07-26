@@ -61,6 +61,7 @@ int Player::attack(Enemies *target) {
         if(getRace() == "Merchant"){
             isMerchAttack = true;
         }
+        target->gg();
    }
    return result;
 }

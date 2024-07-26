@@ -54,6 +54,7 @@ class Game {
 
 
     Floor floor;
+    int levelnumber;
     public:
   //  Game(Floor &floor);
     Game();
@@ -65,6 +66,9 @@ class Game {
     int newRowWrtPlayer(string direction); 
     int newColWrtPlayer(string direction);
     bool isPlayerAlive;
+
+    int getLevelNumber();
+    void setLevelNumber(int new_level);
 
     void resetChar(int row, int col);
     void usePotion(int row, int col);
@@ -81,13 +85,15 @@ class Game {
     void playerDeath();
     bool getPlayerStatus();
     void setPlayerStatus(bool updated_status);
+    void spawnDragon();
     void newLevel();
 
     void randommovement();
     std::vector<std::vector<int>> getAllNeighoubourPoints(int curRow, int curCol);
 
     void playerattack(int currentRow, int currentCol);
-
+        void changeFromAttack();
+    void coverDragonHoard(int row, int col);
 };
 
 

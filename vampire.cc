@@ -8,7 +8,7 @@ Vampire::Vampire(int x , int y) : Player{x,y} {
     def = 25;
 }
 
-int Vampire::attack(Enemies *target) {
+int Vampire::attack(Enemies* target) {
     int result = Player::attack(target);
     if(result != 0){
        if(target->getRace() == "Dwarf"){

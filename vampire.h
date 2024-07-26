@@ -5,7 +5,7 @@
 class Vampire : public Player {
     public:
     Vampire(int x , int y);
-    int attack(Enemies *target) override;
+    int attack(Enemies* target) override;
      ~Vampire();
 };
 

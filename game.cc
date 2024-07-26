@@ -10,7 +10,6 @@ Game::Game()  {
 
 
     isPlayerAlive = true;
-   // player->setMerchAttack(false);
 }
 
 void Game::setGamePlayerRace(std::string tmp_race) {

@@ -22,6 +22,7 @@
 #include "orcs.h"
 
 #include "player.h"
+#include "stairs.h"
 #include "drow.h"
 #include "vampire.h"
 #include "troll.h"
@@ -42,9 +43,9 @@ class Abstractlevel {
     Abstractlevel();
     virtual void generatePotion() = 0;
     virtual void generateTreasure() = 0;
-    virtual void generatetairs() = 0;
+    // virtual void generateStairs() = 0;
     virtual void generateEnemies() = 0;
-   // virtual void generatePlayers() = 0;
+    // virtual void generatePlayers() = 0;
     virtual ~Abstractlevel();
 
 };

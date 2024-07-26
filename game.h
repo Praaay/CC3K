@@ -45,6 +45,8 @@ class Game {
     vector<unique_ptr<Potion> > potions;  // dumbass michael wants this
     Level level;
     unique_ptr<Player> player;
+    unique_ptr<Stairs> stair;
+
     std::vector<unique_ptr<Treasure> > treasure;
     std::vector<unique_ptr<Enemies> > enemies;
 

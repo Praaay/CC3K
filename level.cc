@@ -107,18 +107,72 @@ vector<int> Level::randomCoordinates() {
 
 }
 
+vector<int> Level::randomChamberCoordinates(int chamber) {
+    //vector<vector<int> >& theChamber = chamber1;
+    int len = 0;
+    if (chamber == 1) {  //  fetch the chamber and the size of it.
+        len = chamber1.size();
+        return randomhelper(len, chamber1);
+    } else if (chamber == 2) {
+        len = chamber2.size();
+        return randomhelper(len, chamber2);
+    } else if (chamber == 3) {
+        len = chamber3.size();
+        return randomhelper(len, chamber3);
+    } else if (chamber == 4) {
+        len = chamber4.size();
+        return randomhelper(len, chamber4);
+    } else if (chamber == 5) {
+        len = chamber5.size();
+        return randomhelper(len, chamber5);
+    }
+
+    vector<int> error = {9999999, 401};
+    return error;
+
+}
+
+void Level::generateStairs(Floor &floor) {
+    // prevent same chamber as player
+    int chamber = randomNumberGenerater(1, 5);
+    while (chamber == chamberAt) {
+        chamber = randomNumberGenerater(1, 5);
+    }
+
+    vector<int> location = randomChamberCoordinates(chamber);
+    int row = location[0];
+    int col = location[1];
+
+    stair = make_unique<Stairs>(row, col);
+    floor.setChar(row,col,'\\');
+}
+
+unique_ptr<Stairs> Level::getStairs() {
+    return std::move(stair);
+}
+
+
 void Level::generatePlayers(Floor &floor, std::string tmp_race) {
 
-       vector<int> location = randomCoordinates();
-        int row = location[0];
-        int col = location[1];
+    vector<int> location = randomCoordinates();
+    int row = location[0];
+    int col = location[1];
 
-        
         //player =  make_unique<Drow>(row,col);
-
         // int tmp_row = player->getRow();
         // int tmp_col = player->getCol();
 
+    if (inChamber(row, col, chamber1)) {
+        chamberAt = 1;
+    } else if (inChamber(row, col, chamber2)) {
+        chamberAt = 2;
+    } else if (inChamber(row, col, chamber3)) {
+        chamberAt = 3;
+    } else if (inChamber(row, col, chamber4)) {
+        chamberAt = 4;
+    } else if (inChamber(row, col, chamber5)) {
+        chamberAt = 5;
+    }
 
     if (tmp_race == "Drow") {
         player = make_unique<Drow>(row,col);
@@ -137,8 +191,19 @@ void Level::generatePlayers(Floor &floor, std::string tmp_race) {
         player->setRace("Troll");
     }
        
-
     floor.setChar(row,col,'@');
+}
+
+bool Level::inChamber(int row, int col, vector<vector<int>>& chamber)  {
+    for (int i = 0; i < chamber.size(); ++i) {
+        vector<int> temp = chamber[i];
+        int tempRow = temp[0];
+        int tempCol = temp[1];
+        if (row == tempRow && col == tempCol) {
+            return true;
+        }
+    }
+    return false;
 }
 
 unique_ptr<Player> Level::getPlayer() {
@@ -215,7 +280,6 @@ void Level::generateEnemies() {
     }
 }
 
-void Level::generatetairs() {}
 
 std::vector<unique_ptr<Enemies>> Level::getEnemies() {
     return (std::move(enemies));

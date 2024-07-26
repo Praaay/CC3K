@@ -45,11 +45,9 @@ void Game::newGame() {
     // treasure = make_unique<Normal>(3,7);
     // floor.setChar(3,7,'G');
 
-
-    for (const auto &t : treasure) {
-        int tempRow = t->getRow();
-        int tempCol = t->getCol();
-        floor.setChar(tempRow,tempCol,'G');       
+    for (auto &t : treasure) {
+        floor.setChar(t->getRow(),t->getCol(),'G');
+        //cout<<"The coordinates are "<<t->getRow()<<" "<<t->getCol()<<endl;       
     }
 
 
@@ -63,6 +61,7 @@ void Game::newGame() {
 
     for(auto& pt : potions) {
         floor.setChar(pt->getRow(), pt->getCol(), 'P');
+        
     }
     
 
@@ -85,6 +84,7 @@ void Game::printMessage() {
     cout<<"HP "<<hp<<endl;;
     cout<<"Atk "<<atk<<endl;
     cout<<"Def "<<def<<endl;
+    //cout<<"The si ze of the vector is "<<potions.size()<<endl;
 
 }
 
@@ -229,8 +229,12 @@ void Game::usePotion(int row, int col) {
         if (ps->getRow() == row && ps->getCol() == col) {
             type = ps->getType();
             val = ps->getVal();
+            break;
         }
     }
+
+    cout << "row: " << row << " col: " << col << endl;
+    cout << "type: " << type <<  " val: " << val << endl;
 
     // apply potion and record usage
     if (type == "RH" || type == "PH") {
@@ -251,11 +255,18 @@ void Game::usePotion(int row, int col) {
         player->setDef(player->getDef() + val);
     }
 
-    for (auto ps = potions.begin(); ps != potions.end(); ) {
+    cout << "row: " << row << " col: " << col << endl;
+    cout << "type: " << type <<  " val: " << val << endl;
+
+    for (auto ps = potions.begin(); ps != potions.end(); ++ps) {
         if ((*ps)->getRow() == row && (*ps)->getCol() == col) {
             potions.erase(ps);
+            break;
         }
     }
+
+    cout << "row: " << row << " col: " << col << endl;
+    cout << "type: " << type <<  " val: " << val << endl;
 
 }
 
@@ -263,3 +274,10 @@ void Game::resetChar(int row, int col) {
     char reference = floor.referenceCharAt(row, col);
     floor.setChar(row,col,reference);
 }
+
+void Game::getpotions(){
+    for(int i = 0; i < potions.size(); i++){
+        cout << "row: " << potions[i]->getRow() << " col: " << potions[i]->getCol() << endl;
+    }
+}
+

@@ -133,7 +133,17 @@ int main(int argc, char const *argv[]) {
             }
             
         } else if (command == "a") {
-
+             cin >> secondCommand;
+            if (determineDirection(direction, secondCommand)) {
+                int newRow = object->newRowWrtPlayer(direction);
+                int newCol = object->newColWrtPlayer(direction);
+                object->playerattack(newRow, newCol);
+                // object->render();
+            }  
+            else {
+                // object->render();
+                cout << "wrong input" << endl;
+            }
         } else {
             cout << "wrong input, dumbass" << endl;
         }

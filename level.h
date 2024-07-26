@@ -23,6 +23,8 @@ class Level : public Abstractlevel {
     int randomChamber();
     vector<int> randomCoordinates(); //  returns a vector of coords
 
+    unique_ptr<Player> player;
+
     void generatePotion() override;
     void generateTreasure() override;
 
@@ -30,9 +32,11 @@ class Level : public Abstractlevel {
     std::vector<unique_ptr<Enemies>> getEnemies();
     vector<unique_ptr<Potion> > getPotions();
 
+    unique_ptr<Player> getPlayer();
+
     void generatetairs() override;
     void generateEnemies() override;
-    void generatePlayers() override;
+    void generatePlayers(Floor &floor , std::string tmp_race);
     ~Level();
 
 };

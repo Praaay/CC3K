@@ -21,6 +21,13 @@
 #include "halfing.h"
 #include "orcs.h"
 
+#include "player.h"
+#include "drow.h"
+#include "vampire.h"
+#include "troll.h"
+#include "shade.h"
+#include "goblins.h"
+
 
 using namespace std;
 
@@ -37,7 +44,7 @@ class Abstractlevel {
     virtual void generateTreasure() = 0;
     virtual void generatetairs() = 0;
     virtual void generateEnemies() = 0;
-    virtual void generatePlayers() = 0;
+   // virtual void generatePlayers() = 0;
     virtual ~Abstractlevel();
 
 };

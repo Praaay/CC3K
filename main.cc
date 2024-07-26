@@ -121,14 +121,14 @@ int main(int argc, char const *argv[]) {
                     object.usePotion(newRow, newCol);
                     object.resetChar(newRow, newCol);
 
-                    object.render();
+                   // object.render();
                     cout << "Used a potion" << endl;
                 } else {
-                    object.render();
+                    //object.render();
                     cout << "no potion there, dumbass" << endl;
                 }
             } else {
-                object.render();
+                //object.render();
                 cout << "wrong input, dumbass" << endl;
             }
             

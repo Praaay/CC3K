@@ -15,6 +15,7 @@ class Player : public Character {
 
     int BACount, BDCount, WACount, WDCount;  // track the count of potion used
     bool isMerchAttack;
+    int maxHp;
 
     // int potionMultiplier;
 
@@ -48,11 +49,8 @@ class Player : public Character {
 
     bool getMerchAttack();
     void setMerchAttack(bool status);
-
-    void setGold(int val){
-        goldCount = val;
-    }
-
+    void setGold(int val);
+    virtual void additionalAbility();
 };
 
 #endif

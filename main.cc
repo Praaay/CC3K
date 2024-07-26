@@ -157,8 +157,8 @@ int main(int argc, char const *argv[]) {
                 // object.render();
                 cout << "wrong input" << endl;
             }
-        } 
-        
+        }
+
         
         bool playerStatus = object->getPlayerStatus();
         int playerLevelNumber = object->getLevelNumber();

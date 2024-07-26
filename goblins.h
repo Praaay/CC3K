@@ -6,7 +6,6 @@
 class Goblin : public Player {
     public:
     Goblin(int x , int y);
-
      ~Goblin();
 };
 

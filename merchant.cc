@@ -1,7 +1,7 @@
 #include "merchant.h"
 
 Merchant::Merchant(int x , int y) : Enemies{x,y} {
-    race = "merchant";
+    race = "Merchant";
     hp = 30;
     atk = 70;
     def = 5;

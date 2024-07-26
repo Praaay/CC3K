@@ -52,10 +52,19 @@ void Game::newGame() {
     level.generatePotion();
 
     treasure = level.getTreasure();
+    spawnDragon();
     potions = level.getPotions();
     // treasure = make_unique<Normal>(3,7);
     // floor.setChar(3,7,'G');
-
+    // for (auto n = treasure.begin(); n != treasure.end(); ++n) {
+    //     if((*n)->getGoldType() == "dragonhoard"){
+    //         cout << "row: " << (*n)->getRow() << ", col: " << (*n)->getCol() << std::endl;
+    //     }
+    // }
+    // for (auto n = enemies.begin(); n != enemies.end(); ++n) {
+    //     cout << "Race: " << (*n)->getRace()<< std::endl;
+    // }
+    
     for (auto &t : treasure) {
         floor.setChar(t->getRow(),t->getCol(),'G');
         //cout<<"The coordinates are "<<t->getRow()<<" "<<t->getCol()<<endl;       
@@ -257,7 +266,7 @@ for (auto n = enemies.begin(); n != enemies.end(); n++) {
 
 
 
-cout<<"The number of playre is "<<index<<endl;
+cout<<"The number of player is "<<index<<endl;
 
 }
 
@@ -467,3 +476,28 @@ void Game::playerattack(int currentRow, int currentCol){
     }
 }
 
+void Game::spawnDragon(){
+    int row;
+    int col;
+    for (auto n = treasure.begin(); n != treasure.end(); ++n) {
+        if((*n)->getGoldType() == "dragonhoard"){
+            row = (*n)->getRow();
+            col = (*n)->getCol();
+            std::vector<std::vector<int>> tmp = getAllNeighoubourPoints(row, col);
+            while (true) {
+                int randIndex = std::rand() % 8; 
+                int newRow = tmp[randIndex][0];
+                int newCol = tmp[randIndex][1];
+
+                if (floor.charAt(newRow,newCol) == '.') {
+                    char enem_char = 'D';
+                    unique_ptr<Enemies> dragon = make_unique<Dragon>(newRow, newCol, (*n).get());
+                    dragon->setPosition(newRow, newCol);
+                    floor.setChar(newRow,newCol,enem_char);
+                    enemies.push_back(std::move(dragon));
+                    break;
+                }
+            }
+        }
+    }
+}

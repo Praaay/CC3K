@@ -75,7 +75,7 @@ class Game {
     void playerDeath();
     bool getPlayerStatus();
     void setPlayerStatus(bool updated_status);
-
+    void spawnDragon();
     void randommovement();
     std::vector<std::vector<int>> getAllNeighoubourPoints(int curRow, int curCol);
 

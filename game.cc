@@ -1,5 +1,6 @@
 #include "game.h"
 
+#include <cmath> 
 #include <unistd.h>
 #include <vector>
 
@@ -266,7 +267,7 @@ for (auto n = enemies.begin(); n != enemies.end(); n++) {
     (*n)->setHasMoved(false);
 }
 
-cout<<"The number of playre is "<<index<<endl;
+//cout<<"The number of playre is "<<index<<endl;
 
 }
 
@@ -468,9 +469,12 @@ void Game::playerattack(int currentRow, int currentCol){
         int val = player->attack(target);
         //cout<<"The player health after the attack: "<<target->getHp()<<endl;
 
-        // if (target->getHp() <= 0 ) {
-                
-        // }
+        if (target->getHp() <= 0 ) {
+              int tmp_row = target->getRow();
+              int tmp_col = target->getCol();
+              enemyDeath(tmp_row,tmp_col);
+        }
+
         if(val == 0){
             std::cout << "Missed the attack." << std::endl;
         }
@@ -481,6 +485,33 @@ void Game::playerattack(int currentRow, int currentCol){
     else{
         std::cout << "No enemy in this direction" << std::endl;
     }
+}
+
+void Game::enemyDeath(int tmp_row, int tmp_col) {
+
+    for(auto n = enemies.begin(); n != enemies.end(); n++ ) {
+
+        if((*n)->getRow() == tmp_row && (*n)->getCol() == tmp_col) {
+
+            if((*n)->getRace() != "dragonhoard" && (*n)->getRace() != "human" && (*n)->getRace() != "merchant" ) {
+                int value = std::rand() % 2;
+                int curGold = player->getGold();
+
+                if (value == 0) {
+                    curGold = curGold + 2;
+                    player->setGold(curGold);
+                } else {
+                    curGold = curGold + 1;
+                    player->setGold(curGold);
+                }
+            }
+            n = enemies.erase(n);
+        } else {
+            ++n;
+        }
+    }
+    char reference = floor.referenceCharAt(tmp_row,tmp_col);
+    floor.setChar(tmp_row,tmp_col,reference);
 }
 
 

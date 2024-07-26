@@ -70,7 +70,7 @@ class Game {
     int getLevelNumber();
     void setLevelNumber(int new_level);
 
-   // void enemyDeath();
+    void enemyDeath(int tmp_row, int tmp_col);
 
 
     void resetChar(int row, int col);

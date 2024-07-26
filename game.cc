@@ -468,9 +468,9 @@ void Game::playerattack(int currentRow, int currentCol){
         int val = player->attack(target);
         //cout<<"The player health after the attack: "<<target->getHp()<<endl;
 
-        if (target->getHp() <= 0 ) {
+        // if (target->getHp() <= 0 ) {
                 
-        }
+        // }
         if(val == 0){
             std::cout << "Missed the attack." << std::endl;
         }

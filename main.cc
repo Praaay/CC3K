@@ -134,9 +134,18 @@ int main(int argc, char const *argv[]) {
             
         } else if (command == "a") {
 
-        } else {
-            cout << "wrong input, dumbass" << endl;
-        }
+            cin >> secondCommand;
+            if (determineDirection(direction, secondCommand)) {
+                int newRow = object.newRowWrtPlayer(direction);
+                int newCol = object.newColWrtPlayer(direction);
+                object.playerattack(newRow, newCol);
+                object.render();
+            }  
+            else {
+                object.render();
+                cout << "wrong input" << endl;
+            }
+        } 
         
         bool playerStatus = object.getPlayerStatus();
 
@@ -158,7 +167,6 @@ int main(int argc, char const *argv[]) {
                 }
             }
         } 
-
         object.render();
     }
 }

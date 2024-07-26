@@ -9,8 +9,15 @@ Vampire::Vampire(int x , int y) : Player{x,y} {
 }
 
 int Vampire::attack(Enemies *target) {
-
+    int result = Player::attack(target);
+    if(result != 0){
+       if(target->getRace() == "Dwarf"){
+           setHp(getHp() - 5);
+       }
+       else{
+           setHp(getHp() + 5);
+       }
+   }
 }
-
 
 Vampire::~Vampire() {}

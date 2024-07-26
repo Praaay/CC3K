@@ -1,4 +1,6 @@
 #include "player.h"
+#include "character.h"
+#include "enemies.h"
 
 Player::Player(int x , int y) : Character{'@',x,y} {
     goldCount = 0;
@@ -34,7 +36,21 @@ void Player::gg() {
 }
 
 int Player::attack(Enemies *target) {
-
+   if (target->getRace() == "Halfling"){
+       int val = rand() % 2;
+       if(val) return 0;
+   }
+   int result = 0;
+   result = ceil((100.0 / (100.0 + target->getDef())) * getAtk());
+   target->setHp(target->getHp() - result);
+  
+   if(target->getHp() == 0){
+        if(getRace() == "goblin"){
+            setGold(getGold() + 5);   
+        }
+   }
+   return result;
+  
 }
 
 Player::~Player() {

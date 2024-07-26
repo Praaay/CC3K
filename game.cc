@@ -309,13 +309,13 @@ void Game::getpotions(){
     }
 }
 
-void Game::Playerattack(int currentRow, int currentCol){
+void Game::playerattack(int currentRow, int currentCol){
 
     Enemies *target;
-    
+
     bool isEnemy = false;
     for(int i = 0; i < enemies.size(); i++){
-        if(enemies[i]->getRoW() == currentRow && enemies[i] ->getCol() == currentCol){
+        if(enemies[i]->getRow() == currentRow && enemies[i] ->getCol() == currentCol){
             isEnemy = true;
         }
     } 
@@ -323,6 +323,9 @@ void Game::Playerattack(int currentRow, int currentCol){
         int val = player->attack(target);
         if(val == 0){
             std::cout << "Missed the attack." << std::endl;
+        }
+        else{
+            std::cout << "Attacked the enemy by " << val << std::endl;
         }
     }
     else{

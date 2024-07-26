@@ -9,10 +9,15 @@
 Game::Game(std::string tmp_race)  {
 
     floor.generateFloor();
+
     level.generatePlayers(floor,tmp_race);
     player = level.getPlayer();
+    
     isPlayerAlive = true;
     player->setMerchAttack(false);
+
+    level.generateStairs(floor);
+    stair = level.getStairs();
 }
 
 bool Game::getPlayerStatus() {

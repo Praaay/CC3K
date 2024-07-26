@@ -11,6 +11,7 @@ Game::Game()  {
 
 
     isPlayerAlive = true;
+   
 }
 
 void Game::setGamePlayerRace(std::string tmp_race) {
@@ -35,9 +36,17 @@ Floor Game::getFloor() {
 }
 
 void Game::newGame(){
+    levelnumber = 0;
     newLevel();
 }
 
+int Game::getLevelNumber() {
+    return levelnumber;
+}
+
+void Game::setLevelNumber(int new_level) {
+    levelnumber = new_level;
+}
 
 void Game::newLevel() {
 
@@ -51,13 +60,16 @@ void Game::newLevel() {
     level.generateTreasure();
     level.generateEnemies();
     level.generatePotion();
+    level.generateStairs(floor);
 
-
+    stair = level.getStairs();
     player = level.getPlayer();    
     enemies = level.getEnemies();
     treasure = level.getTreasure();
     spawnDragon();
     potions = level.getPotions();
+
+    levelnumber++;
 
     setPlayerStatus(true);
     for (auto &t : treasure) {
@@ -106,7 +118,7 @@ void Game::printMessage() {
     int atk = player->getAtk();
     int def = player->getDef();
 
-    cout<<"Race: "<<race<<" Gold: "<<goldcount<<endl;
+    cout<<"Race: "<<race<<" Gold: "<<goldcount<<" Level: "<<levelnumber<<endl;
     cout<<"HP "<<hp<<endl;;
     cout<<"Atk "<<atk<<endl;
     cout<<"Def "<<def<<endl;
@@ -141,7 +153,9 @@ void Game::moveplayer(std::string direction) {
     
     if (floor.charAt(newRow,newCol) == 'G') {
         pickupPlayerGold(newRow,newCol);
-    } 
+    } else if (floor.charAt(newRow,newCol) == '\\') {
+        newLevel();
+    }
 
     player->move(floor,direction);
 

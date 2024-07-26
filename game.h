@@ -54,6 +54,7 @@ class Game {
 
 
     Floor floor;
+    int levelnumber;
     public:
   //  Game(Floor &floor);
     Game();
@@ -66,6 +67,9 @@ class Game {
     int newRowWrtPlayer(string direction); 
     int newColWrtPlayer(string direction);
     bool isPlayerAlive;
+
+    int getLevelNumber();
+    void setLevelNumber(int new_level);
 
     void resetChar(int row, int col);
     void usePotion(int row, int col);

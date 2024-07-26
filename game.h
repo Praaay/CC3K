@@ -45,18 +45,23 @@ class Game {
     vector<unique_ptr<Potion> > potions;  // dumbass michael wants this
     Level level;
     unique_ptr<Player> player;
-    unique_ptr<Player> player2;
     unique_ptr<Stairs> stair;
+
     std::vector<unique_ptr<Treasure> > treasure;
-     std::vector<unique_ptr<Enemies> > enemies;
-    
+    std::vector<unique_ptr<Enemies> > enemies;
+
+    std::string playerRace;
 
 
     Floor floor;
     public:
   //  Game(Floor &floor);
-    Game(std::string tmp_race);
+    Game();
     Floor getFloor();
+
+    void setGamePlayerRace(std::string tmp_race);
+
+    std::string getGamePlayerRace();
 
     int newRowWrtPlayer(string direction); 
     int newColWrtPlayer(string direction);
@@ -77,6 +82,7 @@ class Game {
     void playerDeath();
     bool getPlayerStatus();
     void setPlayerStatus(bool updated_status);
+    void newLevel();
 
     void randommovement();
     std::vector<std::vector<int>> getAllNeighoubourPoints(int curRow, int curCol);

@@ -9,6 +9,9 @@ using namespace std;
 
 void Floor::generateFloor(){
 
+    floormap.clear();
+    reference.clear();
+    
     std::string line;
     std::ifstream inp("blankmap.txt");
 

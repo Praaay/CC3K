@@ -2,6 +2,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include <memory>
 
 #include "game.h"
 
@@ -74,15 +75,19 @@ int main(int argc, char const *argv[]) {
         }
     }
 
-    Game object(race);
-    object.newGame();
+    auto object = make_unique<Game>();
+   // cout<<race<<endl;
+    object->setGamePlayerRace(race);
+    //cout<<race<<endl;
+     object->newGame();
+    // cout<<race;
 
 
- //   std::cout << "\x1B[2J\x1B[H";
-    object.render();
+    std::cout << "\x1B[2J\x1B[H";
+    object->render();
     cout << "Action: Player character has spawned"<<endl;
 
-//    cout<<newfloor.charAt(3,5);
+// //    cout<<newfloor.charAt(3,5);
 
 
 
@@ -93,8 +98,8 @@ int main(int argc, char const *argv[]) {
             //cout<<direction;
 
             string tmp_dir;
-            object.moveplayer(direction);
-         //   std::cout << "\x1B[2J\x1B[H";
+            object->moveplayer(direction);
+           std::cout << "\x1B[2J\x1B[H";
             
 
             if (direction == "no") {
@@ -122,14 +127,14 @@ int main(int argc, char const *argv[]) {
             cin >> secondCommand;
 
             if (determineDirection(direction, secondCommand)) {
-                int newRow = object.newRowWrtPlayer(direction);
-                int newCol = object.newColWrtPlayer(direction);
+                int newRow = object->newRowWrtPlayer(direction);
+                int newCol = object->newColWrtPlayer(direction);
                 
-                if (object.getFloor().charAt(newRow, newCol) == 'P') {
+                if (object->getFloor().charAt(newRow, newCol) == 'P') {
                     
                     // object.getpotions();
-                    object.usePotion(newRow, newCol);
-                    object.resetChar(newRow, newCol);
+                    object->usePotion(newRow, newCol);
+                    object->resetChar(newRow, newCol);
 
                     // object.render();
                     cout << "Used a potion" << endl;
@@ -146,9 +151,9 @@ int main(int argc, char const *argv[]) {
 
             cin >> secondCommand;
             if (determineDirection(direction, secondCommand)) {
-                int newRow = object.newRowWrtPlayer(direction);
-                int newCol = object.newColWrtPlayer(direction);
-                object.playerattack(newRow, newCol);
+                int newRow = object->newRowWrtPlayer(direction);
+                int newCol = object->newColWrtPlayer(direction);
+                object->playerattack(newRow, newCol);
                 // object.render();
             }  
             else {
@@ -157,8 +162,9 @@ int main(int argc, char const *argv[]) {
             }
         } 
         
-        bool playerStatus = object.getPlayerStatus();
-
+        
+        bool playerStatus = object->getPlayerStatus();
+    
         if (!playerStatus) {
             char end; 
 
@@ -166,7 +172,10 @@ int main(int argc, char const *argv[]) {
                 cout<<"The Game is over. Do u want to continue. Press r to restart the game and q to quit"<< endl;
                 cin>>end;
                 if (end == 'r') {
-                    object.newGame();
+
+                    // Game newobject(race);
+                    // newobject.newGame();
+                    object->newGame();
                     break;
                 } 
                 else if(end == 'q'){
@@ -176,8 +185,10 @@ int main(int argc, char const *argv[]) {
                     cout << "``wrong input" << endl;
                 }
             }
-        } 
-        object.render();
+        }
+
+        object->render(); 
+        
     }
 }
 

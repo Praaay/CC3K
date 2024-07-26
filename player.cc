@@ -40,7 +40,6 @@ void Player::gg() {
         setHp(0);
         setAtk(0);
         setDef(0);
-        setRace("");
 }
 
 int Player::attack(Enemies *target) {

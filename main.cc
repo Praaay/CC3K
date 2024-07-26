@@ -70,7 +70,7 @@ int main(int argc, char const *argv[]) {
 
  //   std::cout << "\x1B[2J\x1B[H";
     object.render();
-    cout<<"Action: Player character has spawned"<<endl;
+    cout << "Action: Player character has spawned"<<endl;
 
 //    cout<<newfloor.charAt(3,5);
 
@@ -116,15 +116,16 @@ int main(int argc, char const *argv[]) {
                     object.usePotion(newRow, newCol);
                     object.resetChar(newRow, newCol);
 
+                    object.render();
                     cout << "Used a potion" << endl;
                 } else {
+                    object.render();
                     cout << "no potion there, dumbass" << endl;
                 }
             } else {
                 cout << "wrong input, dumbass" << endl;
             }
-
-            object.render();
+            
         } else if (command == "a") {
 
         } else {

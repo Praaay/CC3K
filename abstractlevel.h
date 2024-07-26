@@ -28,8 +28,12 @@ class Abstractlevel {
 
     protected:
     vector<unique_ptr<Potion> > potions;
+<<<<<<< HEAD
     std::vector<unique_ptr<Treasure> > treasure;
     std::vector<unique_ptr<Enemies> > enemies;
+=======
+    vector<unique_ptr<Treasure> > treasure;
+>>>>>>> main
 
     public:
     Abstractlevel();
@@ -40,7 +44,6 @@ class Abstractlevel {
     virtual void generatePlayers() = 0;
     virtual ~Abstractlevel();
 
-    vector<unique_ptr<Potion> > getPotions();
 };
 
 #endif

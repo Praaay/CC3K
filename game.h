@@ -25,6 +25,17 @@
 #include "shade.h"
 #include "goblins.h"
 
+#include "enemies.h"
+#include "elf.h"
+#include "human.h"
+#include "dwarf.h"
+#include "merchant.h"
+#include "dragon.h"
+#include "halfing.h"
+#include "orcs.h"
+#include "PRNG.h"
+
+
 using namespace std;
 
 class Game {
@@ -35,6 +46,7 @@ class Game {
     Level level;
     unique_ptr<Player> player;
     std::vector<unique_ptr<Treasure> > treasure;
+     std::vector<unique_ptr<Enemies> > enemies;
     
 
 
@@ -57,6 +69,7 @@ class Game {
     void nextFloor();
     void printMessage();
     void pickupPlayerGold(int newRow,int newCol);
+    void attackPlayer();
     void getpotions();
 };
 

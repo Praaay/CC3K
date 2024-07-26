@@ -1,12 +1,13 @@
 #include "orcs.h"
 
 Orcs::Orcs(int x , int y) : Enemies{x,y} {
+    race = "orc";
     hp = 130;
     atk = 30;
     def = 25;
 }
 
-void Orcs::attack(Player *) {}
+// void Orcs::attack(Player *) {}
 void Orcs::attackedBy(Player *) {}
 void Orcs::dropGold() {}
 Orcs::~Orcs() {}

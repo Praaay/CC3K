@@ -6,10 +6,6 @@ Player::Player(int x , int y) : Character{'@',x,y} {
     isPlayer = true;
 }
 
-// void Player::move(Floor floor, std::string direction) {
-
-// }
-
 void Player::pickupGold(std::unique_ptr<Treasure> treasure) {
     int newGoldCount = treasure->getValue();
     goldCount += newGoldCount;
@@ -17,6 +13,9 @@ void Player::pickupGold(std::unique_ptr<Treasure> treasure) {
 
 int Player::getGold() {
     return goldCount;
+}
+void Player::setGold(int val){
+    goldCount = val;
 }
 void Player::setRace( std::string tmp_race) {
     this->race = tmp_race;
@@ -30,13 +29,31 @@ void Player::gg() {
 
 }
 
-void Player::attack(std::string direction) {
+int Player::attack(Enemies *target) {
+    if (target->getRace() == "Halfling"){
+        int val = rand() % 2;
+        if(val) return 0;
+    }
+    int result = 0;
+    result = ceil((100.0 / (100.0 + target->getDef())) * getAtk());
+    target->setHp(target->getHp() - result);
+    
+    if(player->getRace() == "Vampire" && result != 0){
+        if(target->getRace() == "Dwarf"){
+            player->setHp(player->getHp() - 5);
+        }
+        else{
+            player->setHp(player->getHp() + 5);
+        }
+    }
 
-}
-
-void Player::attackedBy(Enemies * enemy ) {
+    if(player->getRace() == "goblin" && target->getHp() == 0){
+        player->setGold(player->getGold() + 5);
+    }
+    return result;
     
 }
+
 
 Player::~Player() {
     

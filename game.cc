@@ -221,6 +221,51 @@ void Game::usePotion(int row, int col) {
 
 }
 
+void Game::attack(std::string direction){
+
+    Enemies *target;
+    int currentRow = player->getRow();
+    int currentCol = player->getCol();
+    if (direction == "no") {
+        currentRow--;
+    } else if (direction == "so") {
+        currentRow++;
+    } else if (direction == "ea") {
+        currentCol++;
+    } else if (direction == "we") {
+        currentCol--;
+    } else if (direction == "ne") {
+        currentRow--;
+        currentCol++;
+    } else if (direction == "nw") {
+        currentRow--;
+        currentCol--;
+    } else if (direction == "se") {
+        currentRow++;
+        currentCol++;
+    } else if (direction == "sw") {
+        currentRow++;
+        currentCol--;
+    }
+
+    bool isEnemy = false;
+    for(int i = 0; i < enemies.size(); i++){
+        if(enemies[i]->getRoW() == currentRow && enemies[i] ->getCol() == currentCol){
+            isEnemy = true;
+        }
+    } 
+    if(isEnemy){
+        int val = player->attack(target);
+        if(val == 0){
+            std::cout << "Missed the attack." << std::endl;
+        }
+    }
+    else{
+        std::cout << "No enemy in this direction" << std::endl;
+    }
+}
+
+
 
 void Game::resetChar(int row, int col) {
     char reference = floor.referenceCharAt(row, col);

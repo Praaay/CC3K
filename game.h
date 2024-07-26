@@ -57,6 +57,7 @@ class Game {
     void nextFloor();
     void printMessage();
     void pickupPlayerGold(int newRow,int newCol);
+    void attack(std::string direction);
 };
 
 

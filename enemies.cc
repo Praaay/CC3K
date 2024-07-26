@@ -6,26 +6,25 @@ Enemies::Enemies(int x , int y) : Character{'E',x,y} {
     isPlayer = false;
 }
 void Enemies::dropGold() {}
-void Enemies::gg(){}
+// void Enemies::gg(){}
 
 
 void Enemies::attack(Player * player) {
-    std::cout<<"Heloo "<<std::endl;
 
     int player_def = player->getDef();
     int player_hp = player->getHp();
+
     int damage = ceil((100.0 / (100.0 + player_def)) * atk);
-    std::cout << "atk: " << atk<<std::endl;
-    std::cout << "player_def: " << player_def<<std::endl;
     int new_hp = player_hp - damage;
     int probab = rand();
 
+    if (player_hp > 0 ) {
      if (probab % 2) {
-
         return;
-    } else {
+     } else {
         player->setHp(new_hp);
         
+    }
     }
 }
 

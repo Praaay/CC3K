@@ -27,7 +27,10 @@ std::string Player::getRace() {
 }
 
 void Player::gg() {
-
+        setHp(0);
+        setAtk(0);
+        setDef(0);
+        setRace("");
 }
 
 void Player::attack(std::string direction) {

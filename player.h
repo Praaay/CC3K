@@ -26,7 +26,7 @@ class Player : public Character {
     int getGold();
     void setRace(std::string tmp_race);
     std::string getRace();
-    void gg() override; 
+    void gg(); 
     virtual ~Player();  
 
 

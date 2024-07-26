@@ -68,7 +68,7 @@ int main(int argc, char const *argv[]) {
     object.newGame();
 
 
-    std::cout << "\x1B[2J\x1B[H";
+ //   std::cout << "\x1B[2J\x1B[H";
     object.render();
     cout << "Action: Player character has spawned"<<endl;
 
@@ -78,14 +78,14 @@ int main(int argc, char const *argv[]) {
 
 
     while(cin >> command) {
-
+    
         if (determineDirection(direction, command)) {  //  return true if the command is a direction
             //cout<<direction;
 
             string tmp_dir;
             object.moveplayer(direction);
-            std::cout << "\x1B[2J\x1B[H";
-            object.render();
+         //   std::cout << "\x1B[2J\x1B[H";
+            
 
             if (direction == "no") {
                 tmp_dir = "North";
@@ -137,7 +137,29 @@ int main(int argc, char const *argv[]) {
         } else {
             cout << "wrong input, dumbass" << endl;
         }
+        
+        bool playerStatus = object.getPlayerStatus();
 
+        if (!playerStatus) {
+            char end; 
+
+            while(true){
+                cout<<"The Game is over. Do uu want to continue. Press r to restart the game and q to quit"<< endl;
+                cin>>end;
+                if (end == 'r') {
+                    object.newGame();
+                    break;
+                } 
+                else if(end == 'q'){
+                    return 0;
+                }
+                else {
+                    cout << "``wrong input" << endl;
+                }
+            }
+        } 
+
+        object.render();
     }
 }
 

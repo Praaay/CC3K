@@ -146,27 +146,32 @@ vector<unique_ptr<Potion> > Level::getPotions() {
 }
 
 void Level::generateEnemies() {
-    PRNG prng1;
-    uint32_t seed = getpid();
-    prng1.seed(seed);   
+    // PRNG prng1;
+    // uint32_t seed = getpid();
+    // prng1.seed(seed);   
 
     for (int i = 0; i < 20; i++) {
-        int value = prng1(1,18);
+        vector<int> location = randomCoordinates();
+        int row = location[0];
+        int col = location[1];
+
+
+        int value = randomNumberGenerater(1,18);
   //      std::cout<<value<<endl;
         unique_ptr<Enemies> tmp;
 
         if (1 <= value && value <= 4) {
-            tmp = make_unique<Human>(5,25 - i);
+            tmp = make_unique<Human>(row,col);
         } else if (4 < value && value <= 7) {
-            tmp = make_unique<Dwarf>(5,25 - i);
+            tmp = make_unique<Dwarf>(row,col);
         } else if ( 7 < value && value <= 12) {
-            tmp = make_unique<Halfing>(5,25 - i);
+            tmp = make_unique<Halfing>(row,col);
         }else if (12 <value && value <= 14) {
-            tmp = make_unique<Elf>(5,25 - i);
+            tmp = make_unique<Elf>(row,col);
         } else if (14 < value && value <= 16) {
-            tmp = make_unique<Orcs>(5,25 - i);
+            tmp = make_unique<Orcs>(row,col);
         } else if ( 16 < value && value <= 18) {
-            tmp = make_unique<Merchant>(5,25 - i);
+            tmp = make_unique<Merchant>(row,col);
         }
         enemies.push_back(std::move(tmp));
     }

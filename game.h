@@ -58,6 +58,7 @@ class Game {
 
     int newRowWrtPlayer(string direction); 
     int newColWrtPlayer(string direction);
+    bool isPlayerAlive;
 
     void resetChar(int row, int col);
     void usePotion(int row, int col);
@@ -71,6 +72,9 @@ class Game {
     void pickupPlayerGold(int newRow,int newCol);
     void attackPlayer();
     void getpotions();
+    void playerDeath();
+    bool getPlayerStatus();
+    void setPlayerStatus(bool updated_status);
 };
 
 

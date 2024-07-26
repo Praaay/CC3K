@@ -24,6 +24,16 @@ Game::Game(std::string tmp_race)  {
         player = make_unique<Troll>(4,5);
         setPlayerRace("Troll");
     }
+
+    isPlayerAlive = true;
+}
+
+bool Game::getPlayerStatus() {
+    return isPlayerAlive;
+}
+
+void Game::setPlayerStatus(bool updated_status) {
+    this->isPlayerAlive = updated_status;
 }
 
 Floor Game::getFloor() {
@@ -34,8 +44,6 @@ void Game::newGame() {
     level.generateTreasure();
 
     level.generateEnemies();
-
-    treasure = level.getTreasure();
     enemies = level.getEnemies();
 
     level.generatePotion();
@@ -92,6 +100,7 @@ void Game::moveplayer(std::string direction) {
 
     int newRow = player->getRow();
     int newCol = player->getCol();
+    int player_hp = player->getHp();
 
     if (direction == "no") {
         newRow--;
@@ -117,34 +126,52 @@ void Game::moveplayer(std::string direction) {
     
     if (floor.charAt(newRow,newCol) == 'G') {
         pickupPlayerGold(newRow,newCol);
-    } else if (floor.charAt(newRow,newCol) == 'E')  {
+    } 
 
-        PRNG prng1;
-        uint32_t seed = getpid();
-        prng1.seed(seed);
-        int value = prng1(1,2);
-    }
-
-   
     player->move(floor,direction);
     int player_row = player->getRow();
     int player_col = player->getCol();
+
+
     attackPlayer();
     
+
+
+}
+
+void Game::playerDeath() {
+    int player_row = player->getRow();
+    int player_col = player->getCol();
+    int prev_char = floor.referenceCharAt(player_row,player_col);
+
+    player->gg();
+    player.reset();
+    floor.setChar(player_row,player_col,prev_char);
+
+
 }
 
 void Game::attackPlayer() {
     int player_row = player->getRow();
     int player_col = player->getCol();
     int index = 0;
-   
 
+    cout<<"The player health before the attck"<<player->getHp()<<endl;
     for (auto it = enemies.begin() ; it != enemies.end(); ++it) {
         if ((*it)->inRange(player.get())) {  
-          cout<<"The player can be attacked "<<index<<endl;    
+     //     cout<<"The player can be attacked "<<index<<endl;    
           ++index;      
           (*it)->attack(player.get());    
         }
+    }
+    cout<<"The player health after the attck"<<player->getHp()<<endl;
+
+    if (player->getHp() <= 0) {
+        cout<<"The player shoould die"<<endl;
+        // Player* rawPlayer = player.release()
+        // delete player;
+        setPlayerStatus(false);
+     //   player.reset();
     }
 }
 

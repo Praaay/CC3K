@@ -32,7 +32,7 @@ class Character {
     void setHp(int hp);
 
     void setPosition(int row, int col);
-    virtual void gg() = 0;
+  //  virtual void gg() = 0;
     virtual ~Character();
 };
 

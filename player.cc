@@ -28,6 +28,14 @@ std::string Player::getRace() {
     return race;
 }
 
+bool Player::getMerchAttack() {
+    return isMerchAttack;
+}
+
+void Player::setMerchAttack(bool status) {
+    this->isMerchAttack = status;
+}
+
 void Player::gg() {
         setHp(0);
         setAtk(0);

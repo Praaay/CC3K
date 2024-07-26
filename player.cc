@@ -54,14 +54,14 @@ int Player::attack(Enemies *target) {
    if(result != 0 && target->getRace() == "Merchant"){
         isMerchAttack = true;
    }
-   if(target->getHp() == 0){
+   if (target->getHp() <= 0){
         if(getRace() == "goblin"){
             setGold(getGold() + 5);   
         }
         if(getRace() == "Merchant"){
             isMerchAttack = true;
         }
-        target->gg();
+        //target->gg();
    }
    return result;
 }

@@ -61,7 +61,6 @@ class Game {
     Floor getFloor();
 
     void setGamePlayerRace(std::string tmp_race);
-
     std::string getGamePlayerRace();
 
     int newRowWrtPlayer(string direction); 

@@ -387,6 +387,11 @@ int Game::newColWrtPlayer(string direction) {
 void Game::usePotion(int row, int col) {
     string type;
     int val;
+    int boost = 1;
+
+    if (playerRace == "Drow") {
+        boost = 1.5;
+    }
 
     // find the potion we're dealing with
     for (auto& ps : potions) {
@@ -397,30 +402,30 @@ void Game::usePotion(int row, int col) {
         }
     }
 
-    cout << "row: " << row << " col: " << col << endl;
-    cout << "type: " << type <<  " val: " << val << endl;
+    // cout << "row: " << row << " col: " << col << endl;
+    // cout << "type: " << type <<  " val: " << val << endl;
 
     // apply potion and record usage
     if (type == "RH" || type == "PH") {
-        player->setHp(player->getHp() + val);
+        player->setHp(boost * (player->getHp() + val));
     } else if (type == "BA" || type == "WA") {
         if (type == "BA") {
-            player->setBACount(player->getBACount() + 1);
+            player->setBACount(boost * (player->getBACount() + 1));
         } else {  // "WA"
-            player->setWACount(player->getWACount() + 1);
+            player->setWACount(boost * (player->getWACount() + 1));
         }
-        player->setAtk(player->getAtk() + val);
+        player->setAtk(boost * (player->getAtk() + val));
     } else if (type == "BD" || type == "WD") {
         if (type == "BD") {
-            player->setBDCount(player->getBDCount() + 1);
+            player->setBDCount(boost * (player->getBDCount() + 1));
         } else {  // "WD"
-            player->setWDCount(player->getWDCount() + 1);
+            player->setWDCount(boost * (player->getWDCount() + 1));
         }
-        player->setDef(player->getDef() + val);
+        player->setDef(boost * (player->getDef() + val));
     }
 
-    cout << "row: " << row << " col: " << col << endl;
-    cout << "type: " << type <<  " val: " << val << endl;
+    // cout << "row: " << row << " col: " << col << endl;
+    // cout << "type: " << type <<  " val: " << val << endl;
 
     for (auto ps = potions.begin(); ps != potions.end(); ++ps) {
         if ((*ps)->getRow() == row && (*ps)->getCol() == col) {
@@ -429,8 +434,8 @@ void Game::usePotion(int row, int col) {
         }
     }
 
-    cout << "row: " << row << " col: " << col << endl;
-    cout << "type: " << type <<  " val: " << val << endl;
+    // cout << "row: " << row << " col: " << col << endl;
+    // cout << "type: " << type <<  " val: " << val << endl;
 
 }
 

@@ -313,9 +313,9 @@ void Game::playerattack(int currentRow, int currentCol){
         }
     } 
     if(isEnemy){
-        cout<<"The player health before the attack: "<<target->getHp()<<endl;
+        //cout<<"The player health before the attack: "<<target->getHp()<<endl;
         int val = player->attack(target);
-        cout<<"The player health after the attack: "<<target->getHp()<<endl;
+        //cout<<"The player health after the attack: "<<target->getHp()<<endl;
         if(val == 0){
             std::cout << "Missed the attack." << std::endl;
         }

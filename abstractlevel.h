@@ -11,13 +11,29 @@
 #include "merchanthoard.h"
 #include "dragonhoard.h"
 
+
+#include "enemies.h"
+#include "elf.h"
+#include "human.h"
+#include "dwarf.h"
+#include "merchant.h"
+#include "dragon.h"
+#include "halfing.h"
+#include "orcs.h"
+
+
 using namespace std;
 
 class Abstractlevel {
 
     protected:
     vector<unique_ptr<Potion> > potions;
+<<<<<<< HEAD
+    std::vector<unique_ptr<Treasure> > treasure;
+    std::vector<unique_ptr<Enemies> > enemies;
+=======
     vector<unique_ptr<Treasure> > treasure;
+>>>>>>> main
 
     public:
     Abstractlevel();

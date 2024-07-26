@@ -25,7 +25,8 @@ class Level : public Abstractlevel {
     void generatePotion() override;
     void generateTreasure() override;
 
-    vector<unique_ptr<Treasure> >  getTreasure();
+    std::vector<unique_ptr<Treasure>>  getTreasure();
+    std::vector<unique_ptr<Enemies>> getEnemies();
     vector<unique_ptr<Potion> > getPotions();
 
     void generatetairs() override;

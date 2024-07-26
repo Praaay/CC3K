@@ -75,6 +75,7 @@ class Game {
     void playerDeath();
     bool getPlayerStatus();
     void setPlayerStatus(bool updated_status);
+    void playerattack(int currentRow, int currentCol);
 };
 
 

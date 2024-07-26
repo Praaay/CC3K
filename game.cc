@@ -4,6 +4,7 @@
 #include <vector>
 //Game::Game(Floor &floor) : floor{floor} {}
 
+
 Game::Game(std::string tmp_race)  {
 
     if (tmp_race == "Drow") {
@@ -100,7 +101,6 @@ void Game::moveplayer(std::string direction) {
 
     int newRow = player->getRow();
     int newCol = player->getCol();
-    int player_hp = player->getHp();
 
     if (direction == "no") {
         newRow--;
@@ -129,9 +129,6 @@ void Game::moveplayer(std::string direction) {
     } 
 
     player->move(floor,direction);
-    int player_row = player->getRow();
-    int player_col = player->getCol();
-
 
     attackPlayer();
     
@@ -152,19 +149,15 @@ void Game::playerDeath() {
 }
 
 void Game::attackPlayer() {
-    int player_row = player->getRow();
-    int player_col = player->getCol();
-    int index = 0;
 
-    cout<<"The player health before the attck"<<player->getHp()<<endl;
+    //cout<<"The player health before the attck"<<player->getHp()<<endl;
     for (auto it = enemies.begin() ; it != enemies.end(); ++it) {
         if ((*it)->inRange(player.get())) {  
-     //     cout<<"The player can be attacked "<<index<<endl;    
-          ++index;      
-          (*it)->attack(player.get());    
+        // cout<<"The player can be attacked "<<index<<endl;         
+         (*it)->attack(player.get());    
         }
     }
-    cout<<"The player health after the attck"<<player->getHp()<<endl;
+    //cout<<"The player health after the attck"<<player->getHp()<<endl;
 
     if (player->getHp() <= 0) {
         cout<<"The player shoould die"<<endl;
@@ -308,3 +301,29 @@ void Game::getpotions(){
     }
 }
 
+void Game::playerattack(int currentRow, int currentCol){
+
+    Enemies *target;
+
+    bool isEnemy = false;
+    for(int i = 0; i < enemies.size(); i++){
+        if(enemies[i]->getRow() == currentRow && enemies[i] ->getCol() == currentCol){
+            isEnemy = true;
+            target = enemies[i].get();
+        }
+    } 
+    if(isEnemy){
+        //cout<<"The player health before the attack: "<<target->getHp()<<endl;
+        int val = player->attack(target);
+        //cout<<"The player health after the attack: "<<target->getHp()<<endl;
+        if(val == 0){
+            std::cout << "Missed the attack." << std::endl;
+        }
+        else{
+            std::cout << "Attacked the enemy by " << val << std::endl;
+        }
+    }
+    else{
+        std::cout << "No enemy in this direction" << std::endl;
+    }
+}

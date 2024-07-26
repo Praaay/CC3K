@@ -7,12 +7,5 @@ Troll::Troll(int x , int y) : Player{x,y} {
     def = 15;
 }
 
-void Troll::attack(std::string direction) {
-
-}
-
-void Troll::attackedBy(Enemies * enemy) {
-    
-}
 
 Troll::~Troll() {}

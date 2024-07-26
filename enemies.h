@@ -14,9 +14,7 @@ class Enemies : public Character {
     public:
     Enemies(int x , int y);
     void attack(Player * player);
-
-
-    virtual void attackedBy(Player * ) = 0;
+    
     virtual void dropGold();
     //void move(Floor floor, std::string direction) override;
     bool inRange(Player * player);

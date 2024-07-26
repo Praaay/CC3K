@@ -14,11 +14,13 @@ class Player : public Character {
     int goldCount; 
 
     int BACount, BDCount, WACount, WDCount;  // track the count of potion used
+    bool isMerchAttack;
+    // int potionMultiplier;
 
     public:
     Player(int x , int y);
-    virtual void attack(std::string direction);
-    virtual void attackedBy(Enemies * enemy );
+    virtual int attack(Enemies *target);
+
    // void move(Floor floor, std::string direction) override;
 
     void pickupGold(std::unique_ptr<Treasure> treasure);
@@ -41,6 +43,9 @@ class Player : public Character {
     void setWACount(int count);
     void setWDCount(int count);
 
+    void setGold(int val){
+        goldCount = val;
+    }
 
 };
 

@@ -22,7 +22,7 @@ Level::Level() {
                 coord.push_back(row);
                 coord.push_back(col);
                 
-                cout << coord[0] << ", " << coord[1] << endl;
+                //cout << coord[0] << ", " << coord[1] << endl;
             }
 
             if (temp == '1') {
@@ -43,10 +43,10 @@ Level::Level() {
 
     //cout << "sizeof: " << chamber5.size() << endl;
 
-    for(int i = 0; i < 150; i++) {
-        vector<int> temp = chamber5[i];
-        cout << "row: " << temp[0] << " col: " << temp[1] << endl;
-    }
+    // for(int i = 0; i < 150; i++) {
+    //     vector<int> temp = chamber5[i];
+    //     cout << "row: " << temp[0] << " col: " << temp[1] << endl;
+    // }
 
 }
 
@@ -113,7 +113,7 @@ void Level::generatePotion() {
         int row = location[0];
         int col = location[1];
 
-        cout << "row: " << row << " col: " << col << endl;
+        // cout << "row: " << row << " col: " << col << endl;
 
         unique_ptr<Potion> temp;
 

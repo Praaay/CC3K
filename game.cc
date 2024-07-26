@@ -4,6 +4,7 @@
 #include <vector>
 //Game::Game(Floor &floor) : floor{floor} {}
 
+
 Game::Game(std::string tmp_race)  {
 
     if (tmp_race == "Drow") {
@@ -308,10 +309,23 @@ void Game::getpotions(){
     }
 }
 
-int Game::PlayerAttack(std::string direction){
+void Game::Playerattack(int currentRow, int currentCol){
+
+    Enemies *target;
     
-
-
-
-
+    bool isEnemy = false;
+    for(int i = 0; i < enemies.size(); i++){
+        if(enemies[i]->getRoW() == currentRow && enemies[i] ->getCol() == currentCol){
+            isEnemy = true;
+        }
+    } 
+    if(isEnemy){
+        int val = player->attack(target);
+        if(val == 0){
+            std::cout << "Missed the attack." << std::endl;
+        }
+    }
+    else{
+        std::cout << "No enemy in this direction" << std::endl;
+    }
 }

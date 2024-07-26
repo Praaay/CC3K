@@ -1,7 +1,5 @@
 #include "game.h"
-
-
-//Game::Game(Floor &floor) : floor{floor} {}
+#include <unistd.h>
 
 Game::Game(std::string tmp_race)  {
 
@@ -11,7 +9,6 @@ Game::Game(std::string tmp_race)  {
     } else if (tmp_race == "Vampire") {
         player = make_unique<Vampire>(4,5);
         setPlayerRace("Vampire");
-
         potions.emplace_back(make_unique<Potion>(3, 7, 5, "WD"));
     } else if (tmp_race == "Goblin") {
         player = make_unique<Goblin>(4,5);
@@ -23,8 +20,6 @@ Game::Game(std::string tmp_race)  {
         player = make_unique<Troll>(4,5);
         setPlayerRace("Troll");
     }
-
-
 }
 
 Floor Game::getFloor() {
@@ -33,24 +28,24 @@ Floor Game::getFloor() {
 void Game::newGame() {
     floor.generateFloor();
     level.generateTreasure();
+    level.generateEnemies();
 
     treasure = level.getTreasure();
-
-    // for (const auto &t : treasure) {
-
-    // }
-
-    // treasure = make_unique<Normal>(3,7);
-    // floor.setChar(3,7,'G');
+    enemies = level.getEnemies();
 
     for (const auto &t : treasure) {
         int tempRow = t->getRow();
         int tempCol = t->getCol();
-
         floor.setChar(tempRow,tempCol,'G');       
-   // cout << "Treasure at (" << t->getRow() << ", " << t->getCol() << ")" <<" The type of treasure is "<<t->getGoldType()<<endl;
     }
-    
+
+    for (const auto &en : enemies) {
+        int tempRow = en->getRow();
+        int tempCol = en->getCol();
+
+        floor.setChar(tempRow,tempCol,'E');       
+
+    } 
 }
 
 void Game::render() {
@@ -100,18 +95,40 @@ void Game::moveplayer(std::string direction) {
     }
     
     if (floor.charAt(newRow,newCol) == 'G') {
-        cout<<"Hello";
         pickupPlayerGold(newRow,newCol);
-    }    
+    } else if (floor.charAt(newRow,newCol) == 'E')  {
+
+        PRNG prng1;
+        uint32_t seed = getpid();
+        prng1.seed(seed);
+        int value = prng1(1,2);
+    }
 
    
     player->move(floor,direction);
+    int player_row = player->getRow();
+    int player_col = player->getCol();
+    attackPlayer();
     
+}
+
+void Game::attackPlayer() {
+    int player_row = player->getRow();
+    int player_col = player->getCol();
+    int index = 0;
+   
+
+    for (auto it = enemies.begin() ; it != enemies.end(); ++it) {
+        if ((*it)->inRange(player.get())) {  
+          cout<<"The player can be attacked "<<index<<endl;    
+          ++index;      
+          (*it)->attack(player.get());    
+        }
+    }
 }
 
 void Game::pickupPlayerGold(int newRow,int newCol){
  
-        // for (const auto &t : treasure) {
         
         for(auto it = treasure.begin(); it != treasure.end(); ++it){
         int tempRow = (*it)->getRow();
@@ -131,11 +148,6 @@ void Game::pickupPlayerGold(int newRow,int newCol){
             it = treasure.erase(it);
             break;
         }
-        // if(it == treasure.end()){
-        //     it = treasure.erase(it);
-        //     break;
-        // }            
-   //     cout << "Treasure at (" << t->getRow() << ", " << t->getCol() << ")" <<" The type of treasure is "<<t->getGoldType()<<endl;
     }
 }
 
@@ -217,14 +229,9 @@ void Game::usePotion(int row, int col) {
         }
         player->setDef(player->getDef() + val);
     }
-
-
 }
-
 
 void Game::resetChar(int row, int col) {
     char reference = floor.referenceCharAt(row, col);
     floor.setChar(row,col,reference);
 }
-
-

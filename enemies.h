@@ -1,20 +1,26 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef ENEMIES_H
+#define ENEMIES_H
 
 #include "character.h"
+#include "string.h"
 
 class Player;
 
 class Enemies : public Character {
     protected:
     bool hasMoved;  
+    std::string race;
 
     public:
     Enemies(int x , int y);
-    virtual void attack(Player *) = 0;
-    virtual void attackedBy(Player *) = 0;
+    void attack(Player * player);
+
+
+    virtual void attackedBy(Player * ) = 0;
     virtual void dropGold();
     //void move(Floor floor, std::string direction) override;
+    bool inRange(Player * player);
+    std::string getRace();
     void gg() override;   
     virtual ~Enemies();
 };

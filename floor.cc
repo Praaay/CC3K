@@ -64,6 +64,9 @@ void Floor::printFloor(){
 char Floor::referenceCharAt(int x , int y) {
     return reference[x][y];
 }
+void Floor::referenceSetAt(int x, int y, char symbol){
+    reference[x][y] = symbol;
+}
 
 char Floor::charAt(int x , int y) {
     return floormap[x][y];

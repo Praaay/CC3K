@@ -27,3 +27,11 @@ int Treasure::getRow() {
     return row;
 }
 
+void Treasure::setlocked(){
+    return;
+}
+
+bool Treasure::checklocked(){
+    return false;
+}
+

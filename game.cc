@@ -6,6 +6,7 @@
 //Game::Game(Floor &floor) : floor{floor} {}
 
 
+
 Game::Game()  {
 
 
@@ -65,6 +66,7 @@ void Game::newLevel() {
     player = level.getPlayer();    
     enemies = level.getEnemies();
     treasure = level.getTreasure();
+    spawnDragon();
     potions = level.getPotions();
 
     levelnumber++;
@@ -456,7 +458,9 @@ void Game::playerattack(int currentRow, int currentCol){
         }
     } 
     if(isEnemy){
+        //cout<<"The player health before the attack: "<<target->getHp()<<endl;
         int val = player->attack(target);
+        //cout<<"The player health after the attack: "<<target->getHp()<<endl;
         if(val == 0){
             std::cout << "Missed the attack." << std::endl;
         }
@@ -469,3 +473,53 @@ void Game::playerattack(int currentRow, int currentCol){
     }
 }
 
+void Game::spawnDragon(){
+    int row;
+    int col;
+    for (auto n = treasure.begin(); n != treasure.end(); ++n) {
+        if((*n)->getGoldType() == "dragonhoard"){
+            row = (*n)->getRow();
+            col = (*n)->getCol();
+            std::vector<std::vector<int>> tmp = getAllNeighoubourPoints(row, col);
+            while (true) {
+                int randIndex = std::rand() % 8; 
+                int newRow = tmp[randIndex][0];
+                int newCol = tmp[randIndex][1];
+
+                if (floor.charAt(newRow,newCol) == '.') {
+                    char enem_char = 'D';
+                    unique_ptr<Enemies> dragon = make_unique<Dragon>(newRow, newCol, (*n).get());
+                    dragon->setPosition(newRow, newCol);
+                    floor.setChar(newRow,newCol,enem_char);
+                    enemies.push_back(std::move(dragon));
+                    break;
+                }
+            }
+        }
+    }
+}
+
+
+
+void Game::coverDragonHoard(int newRow, int newCol){
+    floor.referenceSetAt(newRow, newCol, 'G');
+    floor.setChar(newRow, newCol, '.');
+    for(auto& enemy : enemies){
+        if(enemy->getRace() == "dragon"){
+            Treasure* dragonhoard = enemy->getassociatedDH();
+            if(dragonhoard->getRow() == newRow && dragonhoard->getCol() == newCol){
+                if(enemy->getHp()<= 0){
+                    floor.referenceSetAt(newRow, newCol, '.');
+                }
+                break;
+        }
+        }
+    }
+}
+void Game::changeFromAttack(){
+    for(auto& enemy: enemies){
+        if(enemy->getHp()<= 0){
+            floor.setChar(enemy->getRow(), enemy->getCol(), '.');
+        }
+    }
+}

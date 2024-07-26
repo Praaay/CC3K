@@ -1,6 +1,8 @@
 #include "enemies.h"
 #include "player.h"
+#include "treasure.h"
 #include <cmath>
+
 
 Enemies::Enemies(int x , int y) : Character{'E',x,y} {
     isPlayer = false;
@@ -52,6 +54,7 @@ bool Enemies::inRange(Player * player) {
     int dCol = std::abs(player->getCol() - getCol());
     return (dRow <= 1 && dCol <= 1);
 }
-
+Treasure* Enemies::getassociatedDH(){
+    return nullptr;
+}
 Enemies::~Enemies() {}
-

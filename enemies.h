@@ -3,7 +3,7 @@
 
 #include "character.h"
 #include "string.h"
-
+#include "treasure.h"
 class Player;
 
 class Enemies : public Character {
@@ -21,6 +21,7 @@ class Enemies : public Character {
     std::string getRace();
     bool getHasMoved();
     void setHasMoved(bool newvalue);
+    virtual Treasure* getassociatedDH();
   //  void gg() override;   
     virtual ~Enemies();
 };

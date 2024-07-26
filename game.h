@@ -86,13 +86,15 @@ class Game {
     void playerDeath();
     bool getPlayerStatus();
     void setPlayerStatus(bool updated_status);
+    void spawnDragon();
     void newLevel();
 
     void randommovement();
     std::vector<std::vector<int>> getAllNeighoubourPoints(int curRow, int curCol);
 
     void playerattack(int currentRow, int currentCol);
-
+        void changeFromAttack();
+    void coverDragonHoard(int row, int col);
 };
 
 

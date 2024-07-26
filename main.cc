@@ -157,15 +157,10 @@ int main(int argc, char const *argv[]) {
                 // object.render();
                 cout << "wrong input" << endl;
             }
-<<<<<<< HEAD
-        }
-
-=======
         }  else if (command == "f") {
             object->stopEnemy();
         }
         
->>>>>>> main
         
         bool playerStatus = object->getPlayerStatus();
         int playerLevelNumber = object->getLevelNumber();

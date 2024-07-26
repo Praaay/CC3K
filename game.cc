@@ -6,14 +6,21 @@
 //Game::Game(Floor &floor) : floor{floor} {}
 
 
-Game::Game(std::string tmp_race)  {
+Game::Game()  {
 
-    floor.generateFloor();
-    level.generatePlayers(floor,tmp_race);
-    player = level.getPlayer();
+
     isPlayerAlive = true;
-    player->setMerchAttack(false);
+   // player->setMerchAttack(false);
 }
+
+void Game::setGamePlayerRace(std::string tmp_race) {
+    playerRace = tmp_race;
+}
+
+std::string Game::getGamePlayerRace() {
+    return playerRace;
+}
+
 
 bool Game::getPlayerStatus() {
     return isPlayerAlive;
@@ -26,23 +33,34 @@ void Game::setPlayerStatus(bool updated_status) {
 Floor Game::getFloor() {
     return floor;
 }
-void Game::newGame() {
-    
+
+void Game::newGame(){
+    newLevel();
+}
+
+
+void Game::newLevel() {
+
+    treasure.clear();
+    enemies.clear();
+    potions.clear();
+
+    floor.generateFloor();
+
+    level.generatePlayers(floor,playerRace);
     level.generateTreasure();
-
     level.generateEnemies();
-    enemies = level.getEnemies();
-
     level.generatePotion();
 
+
+    player = level.getPlayer();    
+    enemies = level.getEnemies();
     treasure = level.getTreasure();
     potions = level.getPotions();
-    // treasure = make_unique<Normal>(3,7);
-    // floor.setChar(3,7,'G');
 
+    setPlayerStatus(true);
     for (auto &t : treasure) {
-        floor.setChar(t->getRow(),t->getCol(),'G');
-        //cout<<"The coordinates are "<<t->getRow()<<" "<<t->getCol()<<endl;       
+        floor.setChar(t->getRow(),t->getCol(),'G');     
     }
 
 
@@ -66,15 +84,12 @@ void Game::newGame() {
             floor.setChar(tempRow,tempCol,'H');    
         } else if (tempRace == "dwarf") {
             floor.setChar(tempRow,tempCol,'W');    
-        }          
+        }    
     } 
 
     for(auto& pt : potions) {
-        floor.setChar(pt->getRow(), pt->getCol(), 'P');
-        
+        floor.setChar(pt->getRow(), pt->getCol(), 'P');     
     }
-    
-
 }
 
 void Game::render() {
@@ -94,8 +109,6 @@ void Game::printMessage() {
     cout<<"HP "<<hp<<endl;;
     cout<<"Atk "<<atk<<endl;
     cout<<"Def "<<def<<endl;
-    //cout<<"The si ze of the vector is "<<potions.size()<<endl;
-
 }
 
 void Game::moveplayer(std::string direction) {
@@ -172,6 +185,7 @@ std::vector<std::vector<int>> Game::getAllNeighoubourPoints(int curRow, int curC
 
 
 void Game::randommovement() {
+
     const int levelHeight = 25;
     const int floorwidth = 79;
 
@@ -195,7 +209,7 @@ void Game::randommovement() {
         }
 
 
-       if (! enemyAtCurrentPos->getHasMoved()) {       
+       if (! enemyAtCurrentPos->getHasMoved() && enemyAtCurrentPos->getRace() != "dragon") {       
        while (true) {
 
         int randIndex = std::rand() % 8; 
@@ -236,10 +250,6 @@ void Game::randommovement() {
 for (auto n = enemies.begin(); n != enemies.end(); n++) {
     (*n)->setHasMoved(false);
 }
-
-
-
-
 
 cout<<"The number of playre is "<<index<<endl;
 
@@ -283,10 +293,7 @@ void Game::attackPlayer() {
 
     if (player->getHp() <= 0) {
         cout<<"The player shoould die"<<endl;
-        // Player* rawPlayer = player.release()
-        // delete player;
         setPlayerStatus(false);
-     //   player.reset();
     }
 }
 
@@ -436,9 +443,7 @@ void Game::playerattack(int currentRow, int currentCol){
         }
     } 
     if(isEnemy){
-        //cout<<"The player health before the attack: "<<target->getHp()<<endl;
         int val = player->attack(target);
-        //cout<<"The player health after the attack: "<<target->getHp()<<endl;
         if(val == 0){
             std::cout << "Missed the attack." << std::endl;
         }

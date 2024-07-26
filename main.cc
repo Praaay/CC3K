@@ -85,7 +85,6 @@ int main(int argc, char const *argv[]) {
 
     std::cout << "\x1B[2J\x1B[H";
     object->render();
-    cout << "Action: Player character has spawned"<<endl;
 
 // //    cout<<newfloor.charAt(3,5);
 
@@ -119,8 +118,6 @@ int main(int argc, char const *argv[]) {
             } else if (direction == "sw") {
                 tmp_dir = "SouthWest";
             }
-
-            cout << "Action: Player moves " << tmp_dir << endl;
 
         } else if (command == "u") {
 
@@ -164,12 +161,13 @@ int main(int argc, char const *argv[]) {
         
         
         bool playerStatus = object->getPlayerStatus();
+        int playerLevelNumber = object->getLevelNumber();
     
-        if (!playerStatus) {
+        if (!playerStatus || playerLevelNumber > 5) {
             char end; 
 
             while(true){
-                cout<<"The Game is over. Do u want to continue. Press r to restart the game and q to quit"<< endl;
+                cout<<"The Game is over. Do u want to continue ? Press r to restart the game and q to quit"<< endl;
                 cin>>end;
                 if (end == 'r') {
 
@@ -182,7 +180,7 @@ int main(int argc, char const *argv[]) {
                     return 0;
                 }
                 else {
-                    cout << "``wrong input" << endl;
+                    cout << "wrong input" << endl;
                 }
             }
         }

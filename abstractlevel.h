@@ -28,7 +28,6 @@ class Abstractlevel {
     virtual void generatePlayers() = 0;
     virtual ~Abstractlevel();
 
-    vector<unique_ptr<Potion> > getPotions();
 };
 
 #endif

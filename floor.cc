@@ -7,6 +7,10 @@
 
 using namespace std;
 
+// ASCII color codes
+
+
+
 void Floor::generateFloor(){
 
     floormap.clear();
@@ -31,9 +35,27 @@ void Floor::generateFloor(){
 
 void Floor::printFloor(){
 
+    const std::string RESET = "\033[0m";
+    const std::string BLUE = "\033[38;5;45m";
+    const std::string RED = "\033[38;5;196m";
+    const std::string YELLOW = "\033[38;5;226m";
+    const std::string GREEN = "\033[38;5;46m";
+
     for(int i = 0; i < floormap.size(); i++){
         for(int j = 0; j < floormap[0].size(); j++){
-            std::cout << floormap[i][j];
+
+            if (floormap[i][j] == '@' || floormap[i][j] == '\\') {
+               std::cout<<BLUE<<floormap[i][j]<<RESET;
+            } else if ( floormap[i][j] == 'E' || floormap[i][j] == 'D' || floormap[i][j] == 'O' 
+            || floormap[i][j] == 'M'|| floormap[i][j] == 'L' || floormap[i][j] == 'H' || floormap[i][j] == 'W') {
+                std::cout<<RED<<floormap[i][j]<<RESET;
+            } else if (floormap[i][j] == 'G') {
+                std::cout<<YELLOW<<floormap[i][j]<<RESET;
+            } else if (floormap[i][j] == 'P') {
+                std::cout<<GREEN<<floormap[i][j]<<RESET;
+            } else {
+                std::cout<<floormap[i][j];
+            }
         }
         std::cout << endl;
     }

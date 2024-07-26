@@ -1,4 +1,5 @@
 #include "game.h"
+#include <vector>
 
 
 //Game::Game(Floor &floor) : floor{floor} {}
@@ -11,8 +12,6 @@ Game::Game(std::string tmp_race)  {
     } else if (tmp_race == "Vampire") {
         player = make_unique<Vampire>(4,5);
         setPlayerRace("Vampire");
-
-        potions.emplace_back(make_unique<Potion>(3, 7, 5, "WD"));
     } else if (tmp_race == "Goblin") {
         player = make_unique<Goblin>(4,5);
         setPlayerRace("Goblin");
@@ -24,7 +23,6 @@ Game::Game(std::string tmp_race)  {
         setPlayerRace("Troll");
     }
 
-
 }
 
 Floor Game::getFloor() {
@@ -33,13 +31,10 @@ Floor Game::getFloor() {
 void Game::newGame() {
     floor.generateFloor();
     level.generateTreasure();
+    level.generatePotion();
 
     treasure = level.getTreasure();
-
-    // for (const auto &t : treasure) {
-
-    // }
-
+    potions = level.getPotions();
     // treasure = make_unique<Normal>(3,7);
     // floor.setChar(3,7,'G');
 
@@ -49,6 +44,10 @@ void Game::newGame() {
 
         floor.setChar(tempRow,tempCol,'G');       
    // cout << "Treasure at (" << t->getRow() << ", " << t->getCol() << ")" <<" The type of treasure is "<<t->getGoldType()<<endl;
+    }
+
+    for(auto& pt : potions) {
+        floor.setChar(pt->getRow(), pt->getCol(), 'P');
     }
     
 }
@@ -70,6 +69,7 @@ void Game::printMessage() {
     cout<<"HP "<<hp<<endl;;
     cout<<"Atk "<<atk<<endl;
     cout<<"Def "<<def<<endl;
+
 }
 
 void Game::moveplayer(std::string direction) {
@@ -218,6 +218,11 @@ void Game::usePotion(int row, int col) {
         player->setDef(player->getDef() + val);
     }
 
+    for (auto ps = potions.begin(); ps != potions.end(); ) {
+        if ((*ps)->getRow() == row && (*ps)->getCol() == col) {
+            potions.erase(ps);
+        }
+    }
 
 }
 

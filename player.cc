@@ -6,6 +6,7 @@ Player::Player(int x , int y) : Character{'@',x,y} {
     goldCount = 0;
     race = "drow";
     isPlayer = true;
+    isMerchAttack = false;
 }
 
 // void Player::move(Floor floor, std::string direction) {
@@ -54,8 +55,8 @@ int Player::attack(Enemies *target) {
    if(result != 0 && target->getRace() == "Merchant"){
         isMerchAttack = true;
    }
-   if (target->getHp() <= 0){
-        if(getRace() == "goblin"){
+   if(target->getHp() == 0){
+        if(getRace() == "Goblin"){
             setGold(getGold() + 5);   
         }
         if(getRace() == "Merchant"){
@@ -64,6 +65,9 @@ int Player::attack(Enemies *target) {
         //target->gg();
    }
    return result;
+}
+void Player::setGold(int val){
+    goldCount = val;
 }
 
 Player::~Player() {}
@@ -103,6 +107,12 @@ void Player::setWACount(int count) {
 }
 void Player::setWDCount(int count) {
     WDCount = count;
+}
+
+void Player::additionalAbility(){
+    
+    if(getRace() == "troll") 
+    return;
 }
 
 

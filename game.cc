@@ -171,6 +171,7 @@ void Game::moveplayer(std::string direction) {
 
 
     attackPlayer();
+    player->additionalAbility();
 }
 
 void Game::stopEnemy() {
@@ -562,8 +563,8 @@ void Game::coverDragonHoard(int newRow, int newCol){
                 if(enemy->getHp()<= 0){
                     floor.referenceSetAt(newRow, newCol, '.');
                 }
-                break;
-        }
+            break;
+            }
         }
     }
 }

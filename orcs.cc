@@ -1,7 +1,7 @@
 #include "orcs.h"
 
 Orcs::Orcs(int x , int y) : Enemies{x,y} {
-    race = "orc";
+    race = "Orc";
     hp = 130;
     atk = 30;
     def = 25;

@@ -3,9 +3,11 @@
 #include "character.h"
 
 Vampire::Vampire(int x , int y) : Player{x,y} {
+    race = "Vampire";
     hp = 50;
     atk = 25;
     def = 25;
+    maxHp = hp;
 }
 
 int Vampire::attack(Enemies* target) {

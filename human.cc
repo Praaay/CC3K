@@ -1,7 +1,7 @@
 #include "human.h"
 
 Human::Human(int x , int y) : Enemies{x,y} {
-    race = "human";
+    race = "Human";
     hp = 140;
     atk = 20;
     def = 20;

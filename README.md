@@ -6,6 +6,14 @@ CC3k is a roguelike, dungeon-crawling game developed in C++ that immerses player
 
 The inspiration behind CC3k came from classic roguelike games that emphasize strategic combat, exploration, and randomness. The goal was to build an object-oriented C++ application that not only highlights solid software design principles but also offers an engaging gameplay loop with replay value. By implementing design patterns and effective memory management, CC3k achieves modularity and robustness, making it easy to extend or enhance.
 
+## 📸 Demo
+
+<img width="960" alt="Screenshot 2025-04-06 at 6 47 44 PM" src="https://github.com/user-attachments/assets/395e1b32-381e-4e1a-af68-dc859feebe67" />
+
+<img width="970" alt="Screenshot 2025-04-06 at 6 46 36 PM" src="https://github.com/user-attachments/assets/8483de3c-54ce-4e06-872c-18c1a0bb7f28" />
+
+<img width="960" alt="Screenshot 2025-04-06 at 6 47 00 PM" src="https://github.com/user-attachments/assets/8f7f4e27-4e6d-48d4-bfc9-e014326e6519" />
+
 ## 🕹️📋 How It Works
 
 ### 👤 Character Classes
